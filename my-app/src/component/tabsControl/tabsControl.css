@@ -1,0 +1,102 @@
+.tab-title-wrap{
+    position: absolute;
+    left: 0;
+	width: 31.45%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.tab-title-3{
+    position: relative;
+	width: 100%;
+    height: 32.2%;
+    text-align: center;
+    border-radius: 5px 0 0 5px;
+	color: #FFF;
+	background-color: #16818C;
+    display: flex;
+    justify-content:center;
+    align-items:Center;
+    box-shadow:0px 3px 0px rgba(9,108,118,1);
+}
+
+.tab-title-2{
+    position: relative;
+	width: 100%;
+    height: 47.4%;
+    text-align: center;
+    border-radius: 5px 0 0 5px;
+	color: #FFF;
+	background-color: #16818C;
+    display: flex;
+    justify-content:center;
+    align-items:Center;
+    box-shadow:0px 3px 0px rgba(9,108,118,1);
+}
+
+.tab-title-1{
+    position: relative;
+	width: 100%;
+    height: 100%;
+    text-align: center;
+    border-radius: 5px 0 0 5px;
+	color: #FFF;
+	background-color: #16818C;
+    display: flex;
+    justify-content:center;
+    align-items:Center;
+    box-shadow:0px 3px 0px rgba(9,108,118,1);
+    display: none;
+}
+
+.title-txt {
+  font-family: "STYuanti-SC-Regular";
+  font-size: 2.5vw;
+}
+.active{
+	color: #33ADBB;
+	background-color: #FFF;
+}
+.tab-item-wrap{
+    position: absolute;
+    left: 31.45%;
+	width: 68.55%;
+    height: 100%;
+}
+
+.tab-item-wrap-1{
+    position: absolute;
+    left:8%;
+    width: 85%;
+    height: 100%;
+}
+.tab-item{
+	width: 100%;
+	height: 100%;
+	text-align: center;
+    display: none;
+    border-radius: 0 5px 5px 0;
+    background-color:#fff;
+    box-shadow:0px 3px 0px rgba(209,221,221,1);
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.tab-item-1 {
+    width: 100%;
+	height: 100%;
+	text-align: center;
+    display: none;
+    border-radius: 5px;
+    background-color:#fff;
+    box-shadow:0px 3px 0px rgba(209,221,221,1);
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.show{
+	display: block;
+}
