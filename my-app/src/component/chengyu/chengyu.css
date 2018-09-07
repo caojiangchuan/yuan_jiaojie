@@ -1,39 +1,109 @@
 
 
 .main-wrap {
-    position: relative;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 }
 
 img {
     width: 100%;
+    height: 100%;
+    overflow: hidden;
 }
 
 .bg {
     width: 100%;
+    height: 100%;
     position: relative;
     z-index: -1;
+    overflow: hidden;
 }
 
-.teach-img {
-    width: 40%;
-    height: 70%;
+.left-wrap {
     position: absolute;
-    top: 20%;
-    left: 4%;
+    width: 21.64%;
+    height: 80.13%;
+    left: 4.53%;
+    top: 10%;
+}
+
+.matts {
+    position: absolute;
+    width : 92.85%;
+    height: 40%;
+    left: 5%;
+    top: 1.85%;
+}
+
+.chengyu {
+    display: flex;
+    flex-direction: column;
+    width: 92.3%;
+    position: absolute;
+    top: 50%; left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    font-size: 4vw;
+    line-height: 4vw;
+    color: #292929;
+    font-family: "kaiTi";
+    text-align: center;
+}
+
+.chengyu-ciyu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    text-align: center;
+    /* letter-spacing:5px; */
+    white-space: nowrap;
+    /* margin-left:-5px; */
+}
+
+.chengyu-pinyin {
+    color: #E2BD97;
+    font-size: 1.5vw;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    white-space: nowrap;
+}
+
+.chengyu-pinyin span {
+    width: 25%;
 }
 
 .tab-wrap {
     /* border: 1px solid red; */
-    width: 53.91%;
-    height: 67.5%;
+    width: 64.06%;
+    height: 80.13%;
     position: absolute;
-    top: 19.12%;
-    left: 45%;
+    top: 10%;
+    left: 30.47%;
 }
 
-.display-flex-colomn {
+.display-flex-colomn-chengyu {
     display: flex;
     flex-direction: column;
+    width: 92.7%;
+    align-content: center;
+    margin: 5% auto 0;
+}
+
+.chengyu-basic {
+    /* margin-left: 5.3%; */
+    text-align: left;
+    color: #33ADBB;
+    font-size: 2.6vw;
+    margin-bottom: 3%;
+    font-family: "STYuanti-SC-Regular";
+}
+
+.chengyu-basic-content {
+    color: #4D4545;
 }
 
 
@@ -48,26 +118,73 @@ img {
 
 .hr {
     width: 69.13%;
-    height: 2px;
+    height: 1px;
     background-color: #D1DDDD;
     margin-left: 5.3%;
     margin-top: 3%;
     margin-bottom: 5%;
 }
 
-.display-flex-colomn-content {
-    width: 78.44%;
-    color: #FF6F4E;
-    margin-left: 5.3%;
-    font-size: 3vw;
+.display-flex-colomn-content-chengyu {
+    /* width: 94.87%; */
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    color: #312626;
+    /* margin-left: 4%; */
+    /* margin-top: 4%; */
+    font-size: 2.8vw;
+    text-align: left;
+    width: 100%;
+    height: inherit;
+}
+
+.chengyu-item {
     text-align: left;
 }
 
-.words-item {
-    /* flex-wrap: wrap; */
+.chengyu-item-in {
+    width: 103.7%;
+    height: 80%;
+    position: absolute;
+    margin-left: 2.6%;
+    /* padding-top: 4.95%; */
+    margin-top: 4.95%;
+    /* margin-bottom: -4.95%;  */
+    overflow: hidden;
+    overflow-y: scroll;
+    /* z-index: 1; */
+}
+
+.chengyu-item-in::-webkit-scrollbar { width: 0 !important }
+
+.chengyu-cizu-in {
     display: inline-block;
+    text-align: center;
+    width: 20.36%;
+    height: 14%;
+    white-space: nowrap;
+    margin-right: 3.65%;
+    margin-bottom: 5.71%;
+    background-color: #F0F6F7;
+    border-radius:5px;
+}
+
+.chengyu-cizu {
+    display: inline-block;
+    text-align: center;
+    width: 20.36%;
+    height: 10.67%;
+    white-space: nowrap;
+    margin-right: 3.65%;
+    margin-bottom: 5.71%;
+}
+
+.words-item {
     max-width: 100%;
-    word-break: break-all;
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
 }
 
 .words {

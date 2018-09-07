@@ -7,6 +7,15 @@ import config from './../../config';
 import "../common.css";
 import './word.css';
 let defaultNum, length, lengthNum;
+let pinyinArray = [];
+let hanyiArray = [];
+let hanyiSingleArray = [];
+let singleArrayMean = [], pinyinSingleArrayMean = [];
+let moreArrayMean = [], pinyinMoreArrayMean = [];
+let hanyiMoreMap = {},
+    hanyiMoreMapYiArray = []
+let hanyiMoreArray = [];
+
 class Word extends Component {
 
     constructor(props) {
@@ -16,9 +25,10 @@ class Word extends Component {
             loading: true,
             defaultNum: 0,
             length: 0,
-            lengthNum: 0
+            lengthNum: 0,
         }
     }
+
 
     fetch = (params = {}) => {
         var that = this;
@@ -36,6 +46,61 @@ class Word extends Component {
                 loading: false,
                 data: data,
             });
+
+            console.log("this.state.data.word: ", that.state.data);
+
+            //处理多音字
+            // pinyinArray = that.state.data.pinyin && that.state.data.pinyin.split("、");
+            pinyinArray = that.state.data.pinyin
+            hanyiArray = that.state.data.hanyi
+            // let hanyiString = that.state.data.hanyi;
+
+            // for (let i = 0; i < pinyinArray.length; i++) {
+            //     if (i < pinyinArray.length - 1) {
+            //         hanyiArray.push(hanyiString.substring(hanyiString.indexOf(pinyinArray[i]), hanyiString.indexOf(pinyinArray[i + 1])))
+            //     } else {
+            //         hanyiArray.push(hanyiString.substring(hanyiString.indexOf(pinyinArray[i])))
+            //     }
+            // }
+
+
+            // console.log("hanyiArray is: ", hanyiArray);
+            // console.log("pinyinArray is: ", pinyinArray);
+            //构造meaning数组
+            // if (pinyinArray.length == 1) {
+            //     //单音字meaning数组
+            //     singleArrayMean = hanyiArray[0].split("；");
+            //     if (singleArrayMean.length > 1) {
+            //         for (let j = 0; j < singleArrayMean.length; j++) {
+            //             pinyinSingleArrayMean.push(singleArrayMean[j].replace(/^[\d、]*/, "") + "；");
+            //         }
+            //     } else {
+            //         pinyinSingleArrayMean = singleArrayMean;
+            //     }
+            //     console.log(" pinyinSingleArrayMean is: ", pinyinSingleArrayMean);
+            // } else {
+            //     //多音字meaning数组
+            //     for (let k = 0; k < pinyinArray.length; k++) {
+            //         // console.log(hanyiArray[k].split("；"));
+            //         let eachHanyiArray = hanyiArray[k].split("；")
+            //         hanyiMoreMapYiArray = [];
+            //         for (let f = 1; f < eachHanyiArray.length; f++) {
+            //             if (eachHanyiArray.length == 2 && eachHanyiArray[f].length > 0) {
+            //                 hanyiMoreMapYiArray.push(eachHanyiArray[f].replace(/^[\d、]*/, ""))
+            //             } else if (eachHanyiArray.length > 2 && eachHanyiArray[f].length > 0) {
+            //                 hanyiMoreMapYiArray.push(eachHanyiArray[f].replace(/^[\d、]*/, "") + "；")
+            //             }
+            //         }
+            //         hanyiMoreMap = {
+            //             yin: eachHanyiArray[0],
+            //             yi: hanyiMoreMapYiArray
+            //         }
+            //         hanyiMoreArray.push(hanyiMoreMap);
+            //     }
+            //     console.log("hanyiMoreArray is: ", hanyiMoreArray);
+            // }
+
+
             const A = (that.state.data.pinyin || that.state.data.bushou || that.state.data.bihua);
             const B = (that.state.data.hanyi);
             const C = (that.state.data.words || (that.state.data.simwords && that.state.data.simwords.length) || (that.state.data.diffwords && that.state.data.diffwords.length));
@@ -100,77 +165,175 @@ class Word extends Component {
 
     componentDidMount() {
         this.fetch();
+        this.forceUpdate();
+    }
+
+    renderMean = () => {
+        // console.log("in renderMean this.state.data.hanyi is", this.state.data.hanyi[0].yi)
+        if (pinyinArray.length == 1) {
+            return (
+                <div>
+                    {hanyiArray.map((mean, meanK) => {
+                        if (hanyiArray.length == 1) {
+                            return <p className="mean-detail">{mean}</p>
+                        } else {
+                            return <p className="mean-detail"><span className="mean-num">{meanK + 1}</span>{mean}</p>
+                        }
+
+                    })}
+                </div>
+            )
+        } else if (pinyinArray.length > 1 && pinyinArray.length == hanyiArray.length) {
+            return (
+                <div>
+                    {hanyiArray.map((means, meansK) => {
+                        return (
+                            <div>
+                                {means.yi ? (<span style={{ color: '#E2BD97' }}>{`{${means.yin}}`}</span>) : null}
+                                {means.yi && means.yi.map((eachMean, eachMeanK) => {
+                                    // console.log("eachMean is: ", eachMean);
+                                    return <p className="mean-detail"><span className="mean-num">{eachMeanK + 1}</span>{eachMean}</p>
+                                })}
+                            </div>
+                        )
+                    })}
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    {hanyiArray.map((mean, meanK) => {
+                        if (hanyiArray.length == 1) {
+                            return <p className="mean-detail">{mean}</p>
+                        } else {
+                            return <p className="mean-detail"><span className="mean-num">{meanK + 1}</span>{mean}</p>
+                        }
+
+                    })}
+                </div>
+            )
+        }
     }
 
 
+
     render() {
+
         const wordData = this.state.data;
         const words = wordData.words;
+        const wordsArray = words && words.split("、");
+
+
+        console.log(" this.state.data is: ", this.state.data);
+        console.log("pinyinArray  is: ", pinyinArray);
+
+
 
         return (
             <div className='main-wrap'>
                 <div className='bg'>
                     <img src={require('./../../images/bg.png')} />
                 </div>
-                <div className='word-wrap'>
-                    <img src={require('./../../images/matts.png')} />
-                    <span className='word'>{this.props.name}</span>
-                </div>
-                <div className="teach-small-img">
-                    <img src={require('./../../images/img.png')} />
+                <div className='left-wrap'>
+                    <img src={require('./../../images/left-bg.png')} />
+                    <div className='matts'>
+                        <img src={require('./../../images/matts.png')} />
+                        <div className='word'>
+                            <span className="word-hanzi" style={{ textAlign: 'center' }}>{this.props.name}</span>
+                            <p className="word-pinyin">
+                                {pinyinArray.map((pinyin, pinyinK) => {
+                                    return <span>{`{${pinyin}}`}</span>
+                                })}
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div className="tab-wrap">
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
-                        {wordData.pinyin || wordData.bushou || wordData.bihua ? (<div name="基本信息" className="display-flex-colomn">
-                            <span className="display-flex-colomn-title">{this.props.name}</span>
-                            <div className="hr"></div>
-                            {wordData.pinyin ? (<p className="basic">读音: <span className="basic-content">{wordData.pinyin}</span></p>) : null}
-                            {wordData.bushou ? (<p className="basic">部首: <span className="basic-content">{wordData.bushou}</span></p>) : null}
-                            {wordData.bihua ? (<p className="basic">笔画: <span className="basic-content">{wordData.bihua}</span></p>) : null}
-                        </div>) : null}
+                        {wordData.pinyin || wordData.bushou || wordData.bihua ? (
+                            <div name="基本信息" className="display-flex-colomn-word">
+                                {wordData.pinyin ? (<p className="basic-word">
+                                    <span className="basic-word-pinyin">
+                                        <span className="basic-content-span-left">拼音</span>
+                                    </span>
+                                    <span className="basic-content-pinyin">
+                                        <span className="basic-content-span">
+                                            {pinyinArray.map((pinyin, pinyinK) => {
+                                                return (
+                                                    <span style={{ marginRight: '3%' }} >{`{${pinyin}}`}</span>
+                                                )
+                                            })}
+                                        </span>
+                                    </span>
+                                </p>) : null}
+                                {wordData.pinyin ? (<p className="basic-word">
+                                    <span className="basic-word-pinyin">
+                                        <span className="basic-content-span-left">部首</span>
+                                    </span>
+                                    <span className="basic-content-pinyin">
+                                        <span className="basic-content-span">
+                                            {wordData.bushou}
+                                        </span>
+                                    </span>
+                                </p>) : null}
+                                {wordData.bihua ? (<p className="basic-word">
+                                    <span className="basic-word-pinyin">
+                                        <span className="basic-content-span-left">笔画</span>
+                                    </span>
+                                    <span className="basic-content-pinyin">
+                                        <span className="basic-content-span">
+                                            {wordData.bihua}
+                                        </span>
+                                    </span>
+                                </p>) : null}
+                                {wordData.simwords && wordData.simwords.length > 0 ? (
+                                    <p className="basic-word">
+                                        <span className="basic-word-pinyin">
+                                            <span className="basic-content-span-left">近义字</span>
+                                        </span>
+                                        <span className="basic-content-pinyin">
+                                            <span className="basic-content-span">
+                                                {wordData.simwords.map((simList, k) => {
+                                                    return (
+                                                        <span style={{ marginRight: '3%' }} key={simList[0]} >{simList[0]}</span>
+                                                    )
+                                                })}
+                                            </span>
+                                        </span>
+                                    </p>
+                                ) : null}
+                                {wordData.diffwords && wordData.diffwords.length > 0 ? (
+                                    <p className="basic-word">
+                                        <span className="basic-word-pinyin">
+                                            <span className="basic-content-span-left">反义字</span>
+                                        </span>
+                                        <span className="basic-content-pinyin">
+                                            <span className="basic-content-span">
+                                                {wordData.diffwords.map((simList, k) => {
+                                                    return (
+                                                        <span style={{ marginRight: '3%' }} key={simList[0]} >{simList[0]}</span>
+                                                    )
+                                                })}
+                                            </span>
+                                        </span>
+                                    </p>
+                                ) : null}
+                            </div>) : null}
                         {wordData.hanyi ? (<div name="基本释义" className="display-flex-colomn">
-                            <span className="display-flex-colomn-title">基本释义</span>
-                            <div className="hr"></div>
-                            <div className="display-flex-colomn-content">{wordData.hanyi}</div>
+                            <div className="display-flex-colomn-content">
+                                {this.renderMean()}
+                            </div>
                         </div>) : null}
                         {wordData.words || wordData.simwords || wordData.diffwords ? (<div name="词语" className="display-flex-colomn">
                             {wordData.words ? (<div className="words-wrap">
-                                <span className="display-flex-colomn-title">词语</span>
-                                <div className="hr"></div>
-                                <div className="display-flex-colomn-content">{wordData.words}</div>
-                            </div>) : null}
-                            {wordData.simwords && wordData.simwords.length > 0 ? (<div className="words-wrap">
-                                <span className="display-flex-colomn-title">近义字</span>
-                                <div className="hr"></div>
-                                <div className="display-flex-colomn-content">
-                                    {wordData.simwords.map((simList, k) => {
-                                        if (simList[1] == 1) {
+                                <div className="display-flex-colomn-content-cizu word-cizu-item">
+                                    <div className="word-cizu-item-in">
+                                        {wordsArray.map((item, i) => {
                                             return (
-                                                <a style={{ marginRight: '10px' }} key={simList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${simList[0]}&entitytype=汉字&propname=拼音`}>{simList[0]}</a>
+                                                <a className="word-cizu">{item}</a>
                                             )
-                                        } else {
-                                            return (
-                                                <span style={{ marginRight: '10px' }} key={simList[0]}>{simList[0]}</span>
-                                            )
-                                        }
-                                    })}
-                                </div>
-                            </div>) : null}
-                            {wordData.diffwords && wordData.diffwords.length > 0 ? (<div className="words-wrap">
-                                <span className="display-flex-colomn-title">反义字</span>
-                                <div className="hr"></div>
-                                <div className="display-flex-colomn-content">
-                                    {wordData.diffwords.map((diffList, k) => {
-                                        if (diffList[1] == 1) {
-                                            return (
-                                                <a style={{ marginRight: '10px' }} key={diffList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${diffList[0]}&entitytype=汉字&propname=拼音`}>{diffList[0]}</a>
-                                            )
-                                        } else {
-                                            return (
-                                                <span style={{ marginRight: '10px' }} key={diffList[0]}>{diffList[0]}</span>
-                                            )
-                                        }
-                                    })}
+                                        })}
+                                    </div>
                                 </div>
                             </div>) : null}
                         </div>) : null}

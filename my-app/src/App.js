@@ -59,6 +59,9 @@ class App extends React.Component {
       case "汉字":
         return <Word name={entityName} type={entityType} propname={propName} tid={tid} skey={sKey} num={0} />
         break;
+      case "字":
+        return <Word name={entityName} type={entityType} propname={propName} tid={tid} skey={sKey} num={0} />
+        break;
       case "成语":
         return <Chengyu name={entityName} type={entityType} propname={propName} tid={tid} skey={sKey} />
         break;

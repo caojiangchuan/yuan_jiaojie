@@ -97,62 +97,81 @@ class Chengyu extends Component {
 
     componentDidMount() {
         this.fetch();
+        this.forceUpdate();
     }
 
 
     render() {
         const chengyuData = this.state.data;
-        const cehngyu = chengyuData.words;
+        const chengyu = chengyuData.words;
+
+        console.log("chengyuData.pinyin is", chengyuData.pinyin);
+        console.log("this.props.name is: ", this.props.name.split(""));
+        console.log("chengyuData.pinyin is", chengyuData.pinyin && chengyuData.pinyin[0].split(" "));
+
+        let chengyuPinyin = chengyuData.pinyin && chengyuData.pinyin[0].split(" ");
         return (
             <div className='main-wrap'>
                 <div className='bg'>
                     <img src={require('../../images/bg.png')} />
                 </div>
-                <div className="teach-img">
-                    <img src={require('../../images/teacher.png')} />
-                </div>
+                <div className='left-wrap'>
+                    <img src={require('./../../images/left-bg.png')} />
+                    <div className='matts'>
+                        <img src={require('./../../images/matts.png')} />
+                        <div className='chengyu'>
+                            <span className="chengyu-ciyu">
+                                {this.props.name.split("").map((chengyuword, chengyuwordK) => {
+                                    return <span>{chengyuword}</span>
+                                })}
 
+                            </span>
+                            <span className="chengyu-pinyin">
+                                {chengyuPinyin && chengyuPinyin.map((chengyupinyin, chengyupinyinK) => {
+                                    return <span>{chengyupinyin}</span>
+                                })}
+                            </span>
+                        </div>
+                    </div>
+                </div>
                 <div className="tab-wrap">
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
-                        {chengyuData.pinyin || chengyuData.hanyi || chengyuData.chuzi ? (<div name="基本信息" className="display-flex-colomn">
-                            <span className="display-flex-colomn-title">{this.props.name}</span>
-                            <div className="hr"></div>
-                            {chengyuData.pinyin ? (<p className="basic">拼音: <span className="basic-content">{chengyuData.pinyin}</span></p>) : null}
-                            {chengyuData.hanyi ? (<p className="basic">含义: <span className="basic-content">{chengyuData.hanyi}</span></p>) : null}
-                            {chengyuData.chuzi ? (<p className="basic">出自: <span className="basic-content">{chengyuData.chuzi}</span></p>) : null}
+                        {chengyuData.pinyin || chengyuData.hanyi || chengyuData.chuzi ? (<div name="基本信息" className="display-flex-colomn-chengyu">
+                            {chengyuData.hanyi ? (<p className="chengyu-basic">含义: <span className="basic-content chengyu-basic-content">{chengyuData.hanyi}</span></p>) : null}
+                            {chengyuData.chuzi ? (<p className="chengyu-basic">出自: <span className="basic-content chengyu-basic-content">{chengyuData.chuzi}</span></p>) : null}
                         </div>) : null}
-                        {chengyuData.diffwords && chengyuData.diffwords.length ? (<div name="反义词" className="display-flex-colomn">
-                            <span className="display-flex-colomn-title">反义词</span>
-                            <div className="hr"></div>
-                            <div className="display-flex-colomn-content words-item">
-                                {chengyuData.diffwords.map((diffList, k) => {
-                                    if (diffList[1] == 1) {
-                                        return (
-                                            <a style={{ marginRight: '10px' }} key={diffList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${diffList[0]}&entitytype=成语&propname=拼音`}>{diffList[0]}</a>
-                                        )
-                                    } else {
-                                        return (
-                                            <span style={{ marginRight: '10px' }} key={diffList[0]}>{diffList[0]}</span>
-                                        )
-                                    }
-                                })}
+                        {chengyuData.diffwords && chengyuData.diffwords.length > 0 ? (<div name="反义词" className="display-flex-colomn">
+                            <div className="display-flex-colomn-content-chengyu chengyu-item">
+                                <div className="chengyu-item-in">
+                                    {chengyuData.diffwords.map((diffList, k) => {
+                                        if (diffList[1] == 1) {
+                                            return (
+                                                <a className="chengyu-cizu-in" key={diffList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${diffList[0]}&entitytype=成语&propname=拼音`}>{diffList[0]}</a>
+                                            )
+                                        } else {
+                                            return (
+                                                <a className="chengyu-cizu" key={diffList[0]}>{diffList[0]}</a>
+                                            )
+                                        }
+                                    })}
+                                </div>
                             </div>
                         </div>) : null}
-                        {chengyuData.simwords && chengyuData.simwords.length ? (<div name="近义词" className="display-flex-colomn">
-                            <span className="display-flex-colomn-title">近义词</span>
-                            <div className="hr"></div>
-                            <div className="display-flex-colomn-content words-item">
-                                {chengyuData.simwords.map((simList, k) => {
-                                    if (simList[1] == 1) {
-                                        return (
-                                            <a style={{ marginRight: '10px' }} key={simList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${simList[0]}&entitytype=成语&propname=拼音`}>{simList[0]}</a>
-                                        )
-                                    } else {
-                                        return (
-                                            <span style={{ marginRight: '10px' }} key={simList[0]}>{simList[0]}</span>
-                                        )
-                                    }
-                                })}
+                        {chengyuData.simwords && chengyuData.simwords.length > 0 ? (<div name="近义词" className="display-flex-colomn">
+                            <div className="display-flex-colomn-content-chengyu chengyu-item">
+                                <div className="chengyu-item-in">
+                                    {chengyuData.simwords.map((diffList, k) => {
+                                        if (diffList[1] == 1) {
+                                            return (
+                                                <a className="chengyu-cizu-in" key={diffList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${diffList[0]}&entitytype=成语&propname=拼音`}>{diffList[0]}</a>
+                                            )
+                                        } else {
+                                            return (
+                                                <a className="chengyu-cizu" key={diffList[0]}>{diffList[0]}</a>
+                                            )
+                                        }
+                                    })}
+                                </div>
                             </div>
                         </div>) : null}
                     </TabsControl>

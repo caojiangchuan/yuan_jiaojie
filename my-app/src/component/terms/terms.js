@@ -102,65 +102,99 @@ class Terms extends Component {
 
     componentDidMount() {
         this.fetch();
+        this.forceUpdate();
     }
 
 
     render() {
         const termsData = this.state.data;
         const terms = termsData.words;
+
+        let termsPinyin = termsData.pinyin && termsData.pinyin[0].split(" ");
+        console.log("this.props.name.split() length is:", this.props.name.split("").length);
+
         return (
             <div className='main-wrap'>
                 <div className='bg'>
                     <img src={require('./../../images/bg.png')} />
                 </div>
-                <div className="teach-img">
-                    <img src={require('./../../images/teacher.png')} />
+                <div className='left-wrap'>
+                    <img src={require('./../../images/left-bg.png')} />
+                    <div className='matts'>
+                        <img src={require('./../../images/matts.png')} />
+                        {this.props.name.split("").length > 2 ? (<div className='terms'>
+                            <span className="terms-ciyu">
+                                {this.props.name.split("").map((termsword, termswordK) => {
+                                    return <span className="terms-ciyu-zi">{termsword}</span>
+                                })}
+                            </span>
+                            <p className="terms-pinyin">
+                                {termsPinyin && termsPinyin.map((termspinyin, termspinyinK) => {
+                                    return <span>{termspinyin}</span>
+                                })}
+                            </p>
+                        </div>) : (
+                                <div className='terms-2'>
+                                    <span className="terms-ciyu">
+                                        {this.props.name.split("").map((termsword, termswordK) => {
+                                            return <span className="terms-ciyu-zi-2">{termsword}</span>
+                                        })}
+                                    </span>
+                                    <p className="terms-pinyin-2">
+                                        {termsPinyin && termsPinyin.map((termspinyin, termspinyinK) => {
+                                            return <span>{termspinyin}</span>
+                                        })}
+                                    </p>
+                                </div>
+                            )}
+
+                    </div>
                 </div>
                 <div className="tab-wrap">
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
-                        {termsData.pinyin || termsData.hanyi ? (<div name="基本信息" className="display-flex-colomn">
-                            <span className="display-flex-colomn-title">{this.props.name}</span>
-                            <div className="hr"></div>
-                            {termsData.pinyin ? (<p className="basic">拼音: <span className="basic-content">{termsData.pinyin}</span></p>) : null}
-                            {termsData.hanyi ? (<p className="basic">含义: <span className="basic-content">{termsData.hanyi}</span></p>) : null}
+                        {termsData.pinyin || termsData.hanyi ? (<div name="基本释义" className="display-flex-colomn">
+                            {termsData.hanyi ? (
+                                <div className="display-flex-colomn-content terms-shiyi">
+                                    {termsData.hanyi}
+                                </div>) : null}
                         </div>) : null}
                         {termsData.diffwords && termsData.diffwords.length > 0 ? (<div name="反义词" className="display-flex-colomn">
-                            <span className="display-flex-colomn-title">反义词</span>
-                            <div className="hr"></div>
-                            <div className="display-flex-colomn-content words-item">
-                                {termsData.diffwords.map((diffList, k) => {
-                                    if (diffList[1] == 1) {
-                                        return (
-                                            <a style={{ marginRight: '10px' }} key={diffList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${diffList[0]}&entitytype=词语&propname=拼音`}>{diffList[0]}</a>
-                                        )
-                                    } else {
-                                        return (
-                                            <span style={{ marginRight: '10px' }} key={diffList[0]}>{diffList[0]}</span>
-                                        )
-                                    }
-                                })}
+                            <div className="display-flex-colomn-content-terms terms-item">
+                                <div className="terms-item-in">
+                                    {termsData.diffwords.map((diffList, k) => {
+                                        if (diffList[1] == 1) {
+                                            return (
+                                                <a className="terms-cizu-in" key={diffList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${diffList[0]}&entitytype=词语&propname=拼音`}>{diffList[0]}</a>
+                                            )
+                                        } else {
+                                            return (
+                                                <a className="terms-cizu" key={diffList[0]}>{diffList[0]}</a>
+                                            )
+                                        }
+                                    })}
+                                </div>
                             </div>
                         </div>) : null}
                         {termsData.simwords && termsData.simwords.length > 0 ? (<div name="近义词" className="display-flex-colomn">
-                            <span className="display-flex-colomn-title">近义词</span>
-                            <div className="hr"></div>
-                            <div className="display-flex-colomn-content words-item">
-                                {termsData.simwords.map((simList, k) => {
-                                    if (simList[1] == 1) {
-                                        return (
-                                            <a style={{ marginRight: '10px' }} key={simList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${simList[0]}&entitytype=词语&propname=拼音`}>{simList[0]}</a>
-                                        )
-                                    } else {
-                                        return (
-                                            <span style={{ marginRight: '10px' }} key={simList[0]}>{simList[0]}</span>
-                                        )
-                                    }
-                                })}
+                            <div className="display-flex-colomn-content-terms terms-item">
+                                <div className="terms-item-in">
+                                    {termsData.simwords.map((simList, k) => {
+                                        if (simList[1] == 1) {
+                                            return (
+                                                <a className="terms-cizu-in" key={simList[0]} href={`./?tid=${this.props.tid}&skey=${this.props.skey}&entityname=${simList[0]}&entitytype=词语&propname=拼音`}>{simList[0]}</a>
+                                            )
+                                        } else {
+                                            return (
+                                                <span className="terms-cizu" key={simList[0]}>{simList[0]}</span>
+                                            )
+                                        }
+                                    })}
+                                </div>
                             </div>
                         </div>) : null}
                     </TabsControl>
                 </div>
-            </div>
+            </div >
         )
     }
 }

@@ -1,40 +1,51 @@
 .tab-title-wrap{
+    background: linear-gradient(to top,#DEDDDE, #fff);
+    width: 100%;
     position: absolute;
     left: 0;
-	width: 31.45%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    height: 18.07%;
+    border-radius: 10px;
 }
 
+.tab-title-wrap-in{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 98%;
+    border-radius: 10px;
+    height: 86.27%;
+    display: flex;
+    flex-direction: row;
+    background: linear-gradient(to bottom,#F6F8FB, #fff);
+    color:#8C7359;
+    z-index: 1;
+}
 
 .tab-title-3{
     position: relative;
 	width: 100%;
-    height: 32.2%;
-    text-align: center;
-    border-radius: 5px 0 0 5px;
-	color: #FFF;
-	background-color: #16818C;
+    height: 100%;
+    text-align: center;   
+    border-radius: 10px;
     display: flex;
     justify-content:center;
     align-items:Center;
-    box-shadow:0px 3px 0px rgba(9,108,118,1);
+    font-size: 2.5vw;
 }
 
 .tab-title-2{
     position: relative;
 	width: 100%;
-    height: 47.4%;
+    height: 100%;
     text-align: center;
-    border-radius: 5px 0 0 5px;
-	color: #FFF;
-	background-color: #16818C;
+    border-radius: 10px;
     display: flex;
     justify-content:center;
     align-items:Center;
-    box-shadow:0px 3px 0px rgba(9,108,118,1);
+    font-size: 2.5vw;
 }
 
 .tab-title-1{
@@ -42,29 +53,67 @@
 	width: 100%;
     height: 100%;
     text-align: center;
-    border-radius: 5px 0 0 5px;
-	color: #FFF;
-	background-color: #16818C;
+    border-radius: 10px;
     display: flex;
     justify-content:center;
     align-items:Center;
-    box-shadow:0px 3px 0px rgba(9,108,118,1);
-    display: none;
+    font-size: 2.5vw;
 }
 
 .title-txt {
   font-family: "STYuanti-SC-Regular";
-  font-size: 2.5vw;
+  font-size: inherit;
+  position: relative;
+}
+
+.vertical-line {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    width: 0.67%;
+    height: 47%;
+    background-color: #E5E5E5;
+}
+
+.hr-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 10%;
+    width: 20%;
+    border-radius: 2px;
+    height: 2px;
+    background-color: #fff;
 }
 .active{
-	color: #33ADBB;
-	background-color: #FFF;
+	color: #F88977;
+    /* background-color: linear-gradient(0deg,rgba(246,248,251,1),rgba(255,255,255,1)); */
+    font-size: 3vw;
 }
+
+.active-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 10%;
+    width: 23%;
+    border-radius: 2px;
+    height: 2px;
+    background-color: #F88977;
+}
+
 .tab-item-wrap{
     position: absolute;
-    left: 31.45%;
-	width: 68.55%;
-    height: 100%;
+    top: 25.42%;
+    left: 0;
+	width: 100%;
+    height: 74.58%;
+    border-radius: 7px;
+    /* overflow: hidden; */
 }
 
 .tab-item-wrap-1{
@@ -74,15 +123,41 @@
     height: 100%;
 }
 .tab-item{
+    /* position: absolute; */
 	width: 100%;
 	height: 100%;
 	text-align: center;
     display: none;
-    border-radius: 0 5px 5px 0;
+    border-radius: 7px;
     background-color:#fff;
-    box-shadow:0px 3px 0px rgba(209,221,221,1);
     overflow: hidden;
     overflow-y: scroll;
+    -ms-overflow-style: none;
+    overflow-style: none;
+}
+
+.tab-item::-webkit-scrollbar { width: 0 !important }
+
+.tab-item-bottom-1 {
+    width: 98.04%;
+    height: 15px;
+    background-color: #fff;
+    margin: auto;
+    opacity:0.71;
+    border-radius:7px;
+    position: relative;
+    top: -9px;
+}
+
+.tab-item-bottom-2 {
+    width: 95.24%;
+    height: 15px;
+    background-color: #fff;
+    margin: auto;
+    opacity:0.59;
+    border-radius:7px;
+    position: relative;
+    top: -20px;
 }
 
 .tab-item-1 {
@@ -90,12 +165,16 @@
 	height: 100%;
 	text-align: center;
     display: none;
-    border-radius: 5px;
+    border-radius: 10px;
     background-color:#fff;
-    box-shadow:0px 3px 0px rgba(209,221,221,1);
     overflow: hidden;
     overflow-y: scroll;
+    -ms-overflow-style: none;
+    overflow-style: none;
 }
+
+.tab-item-1::-webkit-scrollbar { width: 0 !important }
+
 
 .show{
 	display: block;

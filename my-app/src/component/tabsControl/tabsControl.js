@@ -77,24 +77,30 @@ class TabsControl extends Component {
             tabItemWrap = "tab-item-wrap";
             tabItem = "tab-item"
         } else if (notNullChildren.length == 1) {
-            tabTitleStyle = "tab-title-1";
-            tabItemWrap = "tab-item-wrap-1";
-            tabItem = "tab-item-1"
+            tabTitleStyle = "tab-title-2";
+            tabItemWrap = "tab-item-wrap";
+            tabItem = "tab-item"
         }
 
         return (
             <div style={{ width: '100%' }}>
                 {/*动态生成Tab导航*/}
-                <div className='tab-title-wrap'>
-                    {React.Children.map(notNullChildren, (element, index) => {
-                        return (
-                            /*箭头函数没有自己的this，这里的this继承自外围作用域，即组件本身*/
-                            <div onClick={() => { this.setState({ currentIndex: index }) }} className={this.check_title_index(index)}>
-                                <span className="title-txt">{element && element.props.name}</span>
-                            </div>
-                        );
-                    })}
+
+                <div className='tab-title-wrap' >
+                    <div className='tab-title-wrap-in'>
+                        {React.Children.map(notNullChildren, (element, index) => {
+                            return (
+                                /*箭头函数没有自己的this，这里的this继承自外围作用域，即组件本身*/
+                                <div onClick={() => { this.setState({ currentIndex: index }) }} className={this.check_title_index(index)}>
+                                    <span className="title-txt">{element && element.props.name}</span>
+                                    {notNullChildren.length > 1 ? (<p className={index === this.state.currentIndex ? 'active-line' : 'hr-line'}></p>) : null}
+                                    {notNullChildren.length > 1 && index != (notNullChildren.length - 1) ? (<span className="vertical-line"></span>) : null}
+                                </div>
+                            );
+                        })}
+                    </div>
                 </div>
+
                 {/*Tab内容区域*/}
                 <div className={tabItemWrap}>
                     {React.Children.map(notNullChildren, (element, index) => {
@@ -102,6 +108,8 @@ class TabsControl extends Component {
                             <div className={this.check_item_index(index)}>{element}</div>
                         );
                     })}
+                    <div className="tab-item-bottom-1"></div>
+                    <div className="tab-item-bottom-2"></div>
                 </div>
             </div>
         );
