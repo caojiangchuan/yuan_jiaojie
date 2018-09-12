@@ -105,11 +105,13 @@ class Chengyu extends Component {
         const chengyuData = this.state.data;
         const chengyu = chengyuData.words;
 
-        console.log("chengyuData.pinyin is", chengyuData.pinyin);
-        console.log("this.props.name is: ", this.props.name.split(""));
-        console.log("chengyuData.pinyin is", chengyuData.pinyin && chengyuData.pinyin[0].split(" "));
+        // console.log("chengyuData.pinyin is", chengyuData.pinyin);
+        // console.log("this.props.name is: ", this.props.name.split(""));
+        // console.log("chengyuData.pinyin is", chengyuData.pinyin && chengyuData.pinyin[0].split(" "));
 
         let chengyuPinyin = chengyuData.pinyin && chengyuData.pinyin[0].split(" ");
+        console.log("chengyuData.words.length is: ", this.props.name.length);
+
         return (
             <div className='main-wrap'>
                 <div className='bg'>
@@ -119,24 +121,32 @@ class Chengyu extends Component {
                     <img src={require('./../../images/left-bg.png')} />
                     <div className='matts'>
                         <img src={require('./../../images/matts.png')} />
-                        <div className='chengyu'>
-                            <span className="chengyu-ciyu">
+                        {this.props.name.length > 4 ? (<div className='chengyu'>
+                            <span className="chengyu-ciyu-more">
                                 {this.props.name.split("").map((chengyuword, chengyuwordK) => {
                                     return <span>{chengyuword}</span>
                                 })}
-
                             </span>
-                            <span className="chengyu-pinyin">
-                                {chengyuPinyin && chengyuPinyin.map((chengyupinyin, chengyupinyinK) => {
-                                    return <span>{chengyupinyin}</span>
-                                })}
-                            </span>
-                        </div>
+                        </div>) : (
+                                <div className='chengyu'>
+                                    <span className="chengyu-ciyu">
+                                        {this.props.name.split("").map((chengyuword, chengyuwordK) => {
+                                            return <span>{chengyuword}</span>
+                                        })}
+                                    </span>
+                                    <span className="chengyu-pinyin">
+                                        {chengyuPinyin && chengyuPinyin.map((chengyupinyin, chengyupinyinK) => {
+                                            return <span>{chengyupinyin}</span>
+                                        })}
+                                    </span>
+                                </div>
+                            )}
                     </div>
                 </div>
                 <div className="tab-wrap">
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
                         {chengyuData.pinyin || chengyuData.hanyi || chengyuData.chuzi ? (<div name="基本信息" className="display-flex-colomn-chengyu">
+                            {chengyuData.pinyin ? (<p className="chengyu-basic">拼音: <span className="basic-content chengyu-basic-content">{chengyuData.pinyin}</span></p>) : null}
                             {chengyuData.hanyi ? (<p className="chengyu-basic">含义: <span className="basic-content chengyu-basic-content">{chengyuData.hanyi}</span></p>) : null}
                             {chengyuData.chuzi ? (<p className="chengyu-basic">出自: <span className="basic-content chengyu-basic-content">{chengyuData.chuzi}</span></p>) : null}
                         </div>) : null}

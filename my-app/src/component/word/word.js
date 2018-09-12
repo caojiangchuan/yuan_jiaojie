@@ -101,9 +101,9 @@ class Word extends Component {
             // }
 
 
-            const A = (that.state.data.pinyin || that.state.data.bushou || that.state.data.bihua);
+            const A = (that.state.data.pinyin || that.state.data.bushou || that.state.data.bihua || (that.state.data.simwords && that.state.data.simwords.length) || (that.state.data.diffwords && that.state.data.diffwords.length));
             const B = (that.state.data.hanyi);
-            const C = (that.state.data.words || (that.state.data.simwords && that.state.data.simwords.length) || (that.state.data.diffwords && that.state.data.diffwords.length));
+            const C = (that.state.data.words);
             if (A && B && C) {
                 lengthNum = 3
                 length = 3;
@@ -126,21 +126,21 @@ class Word extends Component {
 
             const propname = that.props.propname;
             if (length === 3) {
-                if (propname === "拼音" || propname === "部首" || propname === "笔画") {
+                if (propname === "拼音" || propname === "部首" || propname === "笔画" || propname === "近义词" || propname === "反义词") {
                     defaultNum = 0;
                 } else if (propname === "含义") {
                     defaultNum = 1;
-                } else if (propname === "组词" || propname === "近义词" || propname === "反义词") {
+                } else if (propname === "组词") {
                     defaultNum = 2;
                 }
             } else if (length === 21) {
-                if (propname === "拼音" || propname === "部首" || propname === "笔画") {
+                if (propname === "拼音" || propname === "部首" || propname === "笔画" || propname === "近义词" || propname === "反义词") {
                     defaultNum = 0;
                 } else {
                     defaultNum = 1;
                 }
             } else if (length === 22) {
-                if (propname === "拼音" || propname === "部首" || propname === "笔画") {
+                if (propname === "拼音" || propname === "部首" || propname === "笔画" || propname === "近义词" || propname === "反义词") {
                     defaultNum = 0;
                 } else {
                     defaultNum = 1;
@@ -241,16 +241,14 @@ class Word extends Component {
                         <div className='word'>
                             <span className="word-hanzi" style={{ textAlign: 'center' }}>{this.props.name}</span>
                             <p className="word-pinyin">
-                                {pinyinArray.map((pinyin, pinyinK) => {
-                                    return <span>{`{${pinyin}}`}</span>
-                                })}
+                                <span>{pinyinArray && pinyinArray[0]}</span>
                             </p>
                         </div>
                     </div>
                 </div>
                 <div className="tab-wrap">
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
-                        {wordData.pinyin || wordData.bushou || wordData.bihua ? (
+                        {wordData.pinyin || wordData.bushou || wordData.bihua || wordData.simwords || wordData.diffwords ? (
                             <div name="基本信息" className="display-flex-colomn-word">
                                 {wordData.pinyin ? (<p className="basic-word">
                                     <span className="basic-word-pinyin">
@@ -324,7 +322,7 @@ class Word extends Component {
                                 {this.renderMean()}
                             </div>
                         </div>) : null}
-                        {wordData.words || wordData.simwords || wordData.diffwords ? (<div name="词语" className="display-flex-colomn">
+                        {wordData.words ? (<div name="词语" className="display-flex-colomn">
                             {wordData.words ? (<div className="words-wrap">
                                 <div className="display-flex-colomn-content-cizu word-cizu-item">
                                     <div className="word-cizu-item-in">

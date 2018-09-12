@@ -5,12 +5,13 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 //style
-import './tabsControl.css'
+import './tabsControl.css';
 
 let notNullChildren = [],
     tabTitleStyle = "",
     tabItemWrap = "",
-    tabItem = ""
+    tabItem = "",
+    clickNum = 0
 
 class TabsControl extends Component {
 
@@ -71,7 +72,7 @@ class TabsControl extends Component {
         if (notNullChildren.length == 3) {
             tabTitleStyle = "tab-title-3";
             tabItemWrap = "tab-item-wrap";
-            tabItem = "tab-item"
+            tabItem = "tab-item";
         } else if (notNullChildren.length == 2) {
             tabTitleStyle = "tab-title-2";
             tabItemWrap = "tab-item-wrap";
@@ -91,7 +92,15 @@ class TabsControl extends Component {
                         {React.Children.map(notNullChildren, (element, index) => {
                             return (
                                 /*箭头函数没有自己的this，这里的this继承自外围作用域，即组件本身*/
-                                <div onClick={() => { this.setState({ currentIndex: index }) }} className={this.check_title_index(index)}>
+                                <div onClick={() => {
+                                    this.setState({ currentIndex: index });
+                                    if (clickNum == 0) {
+                                        window.CommonCmd.sendToAndroid("click")
+                                        clickNum++;
+                                    }
+
+                                }
+                                } className={this.check_title_index(index)}>
                                     <span className="title-txt">{element && element.props.name}</span>
                                     {notNullChildren.length > 1 ? (<p className={index === this.state.currentIndex ? 'active-line' : 'hr-line'}></p>) : null}
                                     {notNullChildren.length > 1 && index != (notNullChildren.length - 1) ? (<span className="vertical-line"></span>) : null}
@@ -111,7 +120,7 @@ class TabsControl extends Component {
                     <div className="tab-item-bottom-1"></div>
                     <div className="tab-item-bottom-2"></div>
                 </div>
-            </div>
+            </div >
         );
     }
 }

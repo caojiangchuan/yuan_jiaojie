@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import TabsControl from './../tabsControl/tabsControl';
 import reqwest from 'reqwest';
 import config from './../../config';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+// import browserHistory from 'react-router';
 
 //style
 import "../common.css";
@@ -19,6 +21,12 @@ class Terms extends Component {
             lengthNum: lengthNum,
             defaultNum: defaultNum
         };
+        this.goBack = this.goBack.bind(this);
+    }
+
+    goBack = () => {
+        console.log(this.props.history)
+        // browserHistory.goBack();
     }
 
     fetch = (params = {}) => {
@@ -100,6 +108,10 @@ class Terms extends Component {
 
     }
 
+    // clickBack = () => {
+
+    // }
+
     componentDidMount() {
         this.fetch();
         this.forceUpdate();
@@ -111,12 +123,15 @@ class Terms extends Component {
         const terms = termsData.words;
 
         let termsPinyin = termsData.pinyin && termsData.pinyin[0].split(" ");
-        console.log("this.props.name.split() length is:", this.props.name.split("").length);
+        // console.log("this.props.name.split() length is:", this.props.name.split("").length);
 
         return (
             <div className='main-wrap'>
                 <div className='bg'>
                     <img src={require('./../../images/bg.png')} />
+                </div>
+                <div className='back' onClick={this.goBack}>
+                    <img src={require('./../../images/back.png')} />
                 </div>
                 <div className='left-wrap'>
                     <img src={require('./../../images/left-bg.png')} />
@@ -152,11 +167,13 @@ class Terms extends Component {
                 </div>
                 <div className="tab-wrap">
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
-                        {termsData.pinyin || termsData.hanyi ? (<div name="基本释义" className="display-flex-colomn">
-                            {termsData.hanyi ? (
-                                <div className="display-flex-colomn-content terms-shiyi">
+                        {termsData.pinyin || termsData.hanyi ? (<div name="基本信息" className="display-flex-colomn-terms">
+                            {termsData.pinyin ? (<p className="terms-basic">拼音: <span className="terms-basic-content">{termsData.pinyin}</span></p>) : null}
+                            {termsData.hanyi ? (<p className="terms-basic">含义: <span className="terms-basic-content">{termsData.hanyi}</span></p>) : null}
+                            {/* {termsData.hanyi ? (
+                                <div className="condisplay-flex-colomn-tent terms-shiyi">
                                     {termsData.hanyi}
-                                </div>) : null}
+                                </div>) : null} */}
                         </div>) : null}
                         {termsData.diffwords && termsData.diffwords.length > 0 ? (<div name="反义词" className="display-flex-colomn">
                             <div className="display-flex-colomn-content-terms terms-item">
