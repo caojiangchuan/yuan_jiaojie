@@ -98,7 +98,6 @@ class TabsControl extends Component {
                                         window.CommonCmd.sendToAndroid("click")
                                         clickNum++;
                                     }
-
                                 }
                                 } className={this.check_title_index(index)}>
                                     <span className="title-txt">{element && element.props.name}</span>

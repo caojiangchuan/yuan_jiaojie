@@ -16,6 +16,8 @@ let hanyiMoreMap = {},
     hanyiMoreMapYiArray = []
 let hanyiMoreArray = [];
 
+const historyLength = window.history.length;
+
 class Word extends Component {
 
     constructor(props) {
@@ -168,6 +170,12 @@ class Word extends Component {
         this.forceUpdate();
     }
 
+    goBack = () => {
+        if (document.referrer) {
+            window.history.back();
+        }
+    }
+
     renderMean = () => {
         // console.log("in renderMean this.state.data.hanyi is", this.state.data.hanyi[0].yi)
         if (pinyinArray.length == 1) {
@@ -234,6 +242,9 @@ class Word extends Component {
                 <div className='bg'>
                     <img src={require('./../../images/bg.png')} />
                 </div>
+                {document.referrer ? (<div className='back' onClick={this.goBack} >
+                    <img src={require('./../../images/back.png')} />
+                </div>) : null}
                 <div className='left-wrap'>
                     <img src={require('./../../images/left-bg.png')} />
                     <div className='matts'>

@@ -6,6 +6,7 @@ import config from './../../config';
 import "../common.css";
 import './chengyu.css';
 let defaultNum, length, lengthNum;
+const historyLength = window.history.length;
 class Chengyu extends Component {
 
     state = {
@@ -100,6 +101,12 @@ class Chengyu extends Component {
         this.forceUpdate();
     }
 
+    goBack = () => {
+        if (document.referrer) {
+            window.history.back();
+        }
+    }
+
 
     render() {
         const chengyuData = this.state.data;
@@ -117,6 +124,9 @@ class Chengyu extends Component {
                 <div className='bg'>
                     <img src={require('../../images/bg.png')} />
                 </div>
+                {document.referrer ? (<div className='back' onClick={this.goBack} >
+                    <img src={require('./../../images/back.png')} />
+                </div>) : null}
                 <div className='left-wrap'>
                     <img src={require('./../../images/left-bg.png')} />
                     <div className='matts'>

@@ -10,6 +10,8 @@ import "../common.css";
 import './terms.css';
 
 let defaultNum, length, lengthNum;
+
+const historyLength = window.history.length;
 class Terms extends Component {
 
     constructor(props) {
@@ -25,8 +27,9 @@ class Terms extends Component {
     }
 
     goBack = () => {
-        console.log(this.props.history)
-        // browserHistory.goBack();
+        if (document.referrer) {
+            window.history.back();
+        }
     }
 
     fetch = (params = {}) => {
@@ -108,9 +111,6 @@ class Terms extends Component {
 
     }
 
-    // clickBack = () => {
-
-    // }
 
     componentDidMount() {
         this.fetch();
@@ -130,9 +130,11 @@ class Terms extends Component {
                 <div className='bg'>
                     <img src={require('./../../images/bg.png')} />
                 </div>
-                <div className='back' onClick={this.goBack}>
+                {document.referrer ? (<div className='back' onClick={this.goBack} >
                     <img src={require('./../../images/back.png')} />
-                </div>
+                </div>) : null}
+                <div>{window.history.length}</div>
+                <div>{document.referrer}</div>
                 <div className='left-wrap'>
                     <img src={require('./../../images/left-bg.png')} />
                     <div className='matts'>

@@ -20,6 +20,14 @@ img {
     overflow: hidden;
 }
 
+.back {
+    position: absolute;
+    padding: 10px;
+    width: 7%;
+    left: 2%;
+    top: 1%;
+}
+
 .left-wrap {
     position: absolute;
     width: 21.64%;
