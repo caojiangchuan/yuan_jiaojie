@@ -231,11 +231,11 @@ img {
 .word-cizu-item-in::-webkit-scrollbar { width: 0 !important }
 
 .word-cizu {
-    overflow: hidden;
+    /* overflow: hidden; */
     display: inline-block;
     text-align: center;
     width: 17.58%;
-    height: 10.67%;
+    height: 13.67%;
     white-space: nowrap;
     margin-right: 6%;
     margin-bottom: 5.71%;

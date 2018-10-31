@@ -133,8 +133,6 @@ class Terms extends Component {
                 {document.referrer ? (<div className='back' onClick={this.goBack} >
                     <img src={require('./../../images/back.png')} />
                 </div>) : null}
-                <div>{window.history.length}</div>
-                <div>{document.referrer}</div>
                 <div className='left-wrap'>
                     <img src={require('./../../images/left-bg.png')} />
                     <div className='matts'>
