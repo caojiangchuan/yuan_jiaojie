@@ -121,7 +121,7 @@ class Chengyu extends Component {
                     </p>)
             } else if (chengyuData.hanyi.length > 1) {
                 return (<div className="chengyu-basic  chengyu-more-hanyi">
-                    <p style={{ whiteSpace: 'nowrap' }}>
+                    <p style={{ whiteSpace: 'nowrap', marginRight: '3%' }}>
                         <a>含义:</a>
                     </p>
                     <div>
@@ -148,7 +148,7 @@ class Chengyu extends Component {
                     </p>)
             } else if (chengyuData.zaoju.length > 1) {
                 return (<div className="chengyu-basic  chengyu-more-zaoju">
-                    <p id="zaojuAnchor" style={{ whiteSpace: 'nowrap' }}>
+                    <p id="zaojuAnchor" style={{ whiteSpace: 'nowrap', marginRight: '3%' }}>
                         <a href="#zaojuAnchor">造句:</a>
                     </p>
                     <div>
