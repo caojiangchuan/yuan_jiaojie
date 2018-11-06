@@ -34,7 +34,7 @@ class Chengyu extends Component {
                 loading: false,
                 data: data,
             });
-            const A = (that.state.data.pinyin || that.state.data.hanyi || that.state.data.chuzi);
+            const A = (that.state.data.pinyin || that.state.data.hanyi || that.state.data.chuzi || that.state.data.zaoju);
             const B = (that.state.data.simwords && that.state.data.diffwords.length);
             const C = (that.state.data.simwords && that.state.data.simwords.length);
             if (A && B && C) {
@@ -58,8 +58,11 @@ class Chengyu extends Component {
             }
 
             const propname = that.props.propname;
+            if (propname === "造句") {
+                window.location.href = "#zaojuAnchor"
+            }
             if (length === 3) {
-                if (propname === "拼音" || propname === "含义" || propname === "出处") {
+                if (propname === "拼音" || propname === "含义" || propname === "出处" || propname === "造句") {
                     defaultNum = 0;
                 } else if (propname === "反义词") {
                     defaultNum = 1;
@@ -67,13 +70,13 @@ class Chengyu extends Component {
                     defaultNum = 2;
                 }
             } else if (length === 21) {
-                if (propname === "拼音" || propname === "含义" || propname === "出处") {
+                if (propname === "拼音" || propname === "含义" || propname === "出处" || propname === "造句") {
                     defaultNum = 0;
                 } else {
                     defaultNum = 1;
                 }
             } else if (length === 22) {
-                if (propname === "拼音" || propname === "含义" || propname === "出处") {
+                if (propname === "拼音" || propname === "含义" || propname === "出处" || propname === "造句") {
                     defaultNum = 0;
                 } else {
                     defaultNum = 1;
@@ -104,6 +107,33 @@ class Chengyu extends Component {
     goBack = () => {
         if (document.referrer) {
             window.history.back();
+        }
+    }
+
+    renderZaoju = () => {
+        const chengyuData = this.state.data;
+        if (chengyuData.zaoju) {
+            if (chengyuData.zaoju.length === 1) {
+                return (
+                    <p id="zaojuAnchor" className="chengyu-basic">
+                        <a href="#zaojuAnchor">造句:</a>
+                        <span className="chengyu-basic-content">{chengyuData.zaoju}</span>
+                    </p>)
+            } else if (chengyuData.zaoju.length > 1) {
+                return (<div className="chengyu-basic  chengyu-more-zaoju">
+                    <p id="zaojuAnchor" style={{ whiteSpace: 'nowrap' }}>
+                        <a href="#zaojuAnchor">造句:</a>
+                    </p>
+                    <div>
+                        {chengyuData.zaoju.map((zaojuValue, zaojuKey) => {
+                            return <p className="chengyu-basic-content">
+                                <span className="zaoju-num">{zaojuKey + 1}</span>{zaojuValue}</p>
+                        })}
+                    </div>
+                </div>)
+            }
+        } else {
+            return null;
         }
     }
 
@@ -155,10 +185,11 @@ class Chengyu extends Component {
                 </div>
                 <div className="tab-wrap">
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
-                        {chengyuData.pinyin || chengyuData.hanyi || chengyuData.chuzi ? (<div name="基本信息" className="display-flex-colomn-chengyu">
+                        {chengyuData.pinyin || chengyuData.hanyi || chengyuData.chuzi || chengyuData.zaoju ? (<div name="基本信息" className="display-flex-colomn-chengyu">
                             {chengyuData.pinyin ? (<p className="chengyu-basic">拼音: <span className="basic-content chengyu-basic-content">{chengyuData.pinyin}</span></p>) : null}
                             {chengyuData.hanyi ? (<p className="chengyu-basic">含义: <span className="basic-content chengyu-basic-content">{chengyuData.hanyi}</span></p>) : null}
                             {chengyuData.chuzi ? (<p className="chengyu-basic">出自: <span className="basic-content chengyu-basic-content">{chengyuData.chuzi}</span></p>) : null}
+                            {this.renderZaoju()}
                         </div>) : null}
                         {chengyuData.diffwords && chengyuData.diffwords.length > 0 ? (<div name="反义词" className="display-flex-colomn">
                             <div className="display-flex-colomn-content-chengyu chengyu-item">

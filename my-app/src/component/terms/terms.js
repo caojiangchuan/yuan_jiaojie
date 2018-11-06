@@ -47,7 +47,7 @@ class Terms extends Component {
                 loading: false,
                 data: data,
             });
-            const A = (that.state.data.pinyin || that.state.data.hanyi);
+            const A = (that.state.data.pinyin || that.state.data.hanyi || that.state.data.zaoju);
             const B = (that.state.data.simwords && that.state.data.diffwords.length);
             const C = (that.state.data.simwords && that.state.data.simwords.length);
             if (A && B && C) {
@@ -71,8 +71,11 @@ class Terms extends Component {
             }
 
             const propname = that.props.propname;
+            if (propname === "造句") {
+                window.location.href = "#zaojuAnchor"
+            }
             if (length === 3) {
-                if (propname === "拼音" || propname === "含义") {
+                if (propname === "拼音" || propname === "含义" || propname === "造句") {
                     defaultNum = 0;
                 } else if (propname === "反义词") {
                     defaultNum = 1;
@@ -80,13 +83,13 @@ class Terms extends Component {
                     defaultNum = 2;
                 }
             } else if (length === 21) {
-                if (propname === "拼音" || propname === "含义") {
+                if (propname === "拼音" || propname === "含义" || propname === "造句") {
                     defaultNum = 0;
                 } else {
                     defaultNum = 1;
                 }
             } else if (length === 22) {
-                if (propname === "拼音" || propname === "含义") {
+                if (propname === "拼音" || propname === "含义" || propname === "造句") {
                     defaultNum = 0;
                 } else {
                     defaultNum = 1;
@@ -116,6 +119,58 @@ class Terms extends Component {
         this.fetch();
         this.forceUpdate();
     }
+
+    renderHanyi = () => {
+        const termsData = this.state.data;
+        if (termsData.hanyi) {
+            if (termsData.hanyi.length === 1) {
+                return (
+                    <p className="terms-basic">含义:
+                         <span className="terms-basic-content">{termsData.hanyi}</span>
+                    </p>)
+            } else if (termsData.hanyi.length > 1) {
+                return (<div className="terms-basic  terms-more-hanyi">
+                    <p style={{ whiteSpace: 'nowrap' }}>含义:</p>
+                    <div>
+                        {termsData.hanyi.map((hanyiValue, hanyiKey) => {
+                            return <p className="terms-basic-content">
+                                <span className="hanyi-num">{hanyiKey + 1}</span>{hanyiValue}</p>
+                        })}
+                    </div>
+                </div>)
+            }
+        } else {
+            return null;
+        }
+    }
+
+    renderZaoju = () => {
+        const termsData = this.state.data;
+        if (termsData.zaoju) {
+            if (termsData.zaoju.length === 1) {
+                return (
+                    <p id="zaojuAnchor" className="terms-basic">
+                        <a href="#zaojuAnchor">造句:</a>
+                        <span className="terms-basic-content">{termsData.zaoju}</span>
+                    </p>)
+            } else if (termsData.zaoju.length > 1) {
+                return (<div className="terms-basic  terms-more-zaoju">
+                    <p id="zaojuAnchor" style={{ whiteSpace: 'nowrap' }}>
+                        <a href="#zaojuAnchor">造句:</a>
+                    </p>
+                    <div>
+                        {termsData.zaoju.map((hanyiValue, hanyiKey) => {
+                            return <p className="terms-basic-content">
+                                <span className="zaoju-num">{hanyiKey + 1}</span>{hanyiValue}</p>
+                        })}
+                    </div>
+                </div>)
+            }
+        } else {
+            return null;
+        }
+    }
+
 
 
     render() {
@@ -167,13 +222,18 @@ class Terms extends Component {
                 </div>
                 <div className="tab-wrap">
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
-                        {termsData.pinyin || termsData.hanyi ? (<div name="基本信息" className="display-flex-colomn-terms">
+                        {termsData.pinyin || termsData.hanyi || termsData.zaoju ? (<div name="基本信息" className="display-flex-colomn-terms">
                             {termsData.pinyin ? (<p className="terms-basic">拼音: <span className="terms-basic-content">{termsData.pinyin}</span></p>) : null}
-                            {termsData.hanyi ? (<p className="terms-basic">含义: <span className="terms-basic-content">{termsData.hanyi}</span></p>) : null}
+                            {/* {termsData.hanyi ? (<p className="terms-basic">含义:
+                                <span className="terms-basic-content">{termsData.hanyi}</span>
+                            </p>) : null} */}
+                            {this.renderHanyi()}
+                            {this.renderZaoju()}
                             {/* {termsData.hanyi ? (
                                 <div className="condisplay-flex-colomn-tent terms-shiyi">
                                     {termsData.hanyi}
                                 </div>) : null} */}
+
                         </div>) : null}
                         {termsData.diffwords && termsData.diffwords.length > 0 ? (<div name="反义词" className="display-flex-colomn">
                             <div className="display-flex-colomn-content-terms terms-item">

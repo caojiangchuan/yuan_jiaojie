@@ -120,6 +120,25 @@ img {
     color: #4D4545;
 }
 
+.chengyu-more-zaoju {
+    display: flex;
+}
+
+.zaoju-num {
+    color: #fff;
+    display: inline-block;
+    font-size: 1.8vw;
+    width: 3vw;
+    height: 3vw;
+    text-align: center;
+    line-height: 3vw;
+    border-radius: 100%;
+    background-color: #33ADBB;
+    margin-left: 5px;
+    margin-right: 3%;
+    position: relative;
+    top: -0.5vw;
+}
 
 .display-flex-colomn-title {
     font-family: "STYuanti-SC-Regular";

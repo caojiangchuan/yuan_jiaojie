@@ -52,55 +52,9 @@ class Word extends Component {
             console.log("this.state.data.word: ", that.state.data);
 
             //处理多音字
-            // pinyinArray = that.state.data.pinyin && that.state.data.pinyin.split("、");
             pinyinArray = that.state.data.pinyin
             hanyiArray = that.state.data.hanyi
-            // let hanyiString = that.state.data.hanyi;
 
-            // for (let i = 0; i < pinyinArray.length; i++) {
-            //     if (i < pinyinArray.length - 1) {
-            //         hanyiArray.push(hanyiString.substring(hanyiString.indexOf(pinyinArray[i]), hanyiString.indexOf(pinyinArray[i + 1])))
-            //     } else {
-            //         hanyiArray.push(hanyiString.substring(hanyiString.indexOf(pinyinArray[i])))
-            //     }
-            // }
-
-
-            // console.log("hanyiArray is: ", hanyiArray);
-            // console.log("pinyinArray is: ", pinyinArray);
-            //构造meaning数组
-            // if (pinyinArray.length == 1) {
-            //     //单音字meaning数组
-            //     singleArrayMean = hanyiArray[0].split("；");
-            //     if (singleArrayMean.length > 1) {
-            //         for (let j = 0; j < singleArrayMean.length; j++) {
-            //             pinyinSingleArrayMean.push(singleArrayMean[j].replace(/^[\d、]*/, "") + "；");
-            //         }
-            //     } else {
-            //         pinyinSingleArrayMean = singleArrayMean;
-            //     }
-            //     console.log(" pinyinSingleArrayMean is: ", pinyinSingleArrayMean);
-            // } else {
-            //     //多音字meaning数组
-            //     for (let k = 0; k < pinyinArray.length; k++) {
-            //         // console.log(hanyiArray[k].split("；"));
-            //         let eachHanyiArray = hanyiArray[k].split("；")
-            //         hanyiMoreMapYiArray = [];
-            //         for (let f = 1; f < eachHanyiArray.length; f++) {
-            //             if (eachHanyiArray.length == 2 && eachHanyiArray[f].length > 0) {
-            //                 hanyiMoreMapYiArray.push(eachHanyiArray[f].replace(/^[\d、]*/, ""))
-            //             } else if (eachHanyiArray.length > 2 && eachHanyiArray[f].length > 0) {
-            //                 hanyiMoreMapYiArray.push(eachHanyiArray[f].replace(/^[\d、]*/, "") + "；")
-            //             }
-            //         }
-            //         hanyiMoreMap = {
-            //             yin: eachHanyiArray[0],
-            //             yi: hanyiMoreMapYiArray
-            //         }
-            //         hanyiMoreArray.push(hanyiMoreMap);
-            //     }
-            //     console.log("hanyiMoreArray is: ", hanyiMoreArray);
-            // }
 
 
             const A = (that.state.data.pinyin || that.state.data.bushou || that.state.data.bihua || (that.state.data.simwords && that.state.data.simwords.length) || (that.state.data.diffwords && that.state.data.diffwords.length));
@@ -177,7 +131,9 @@ class Word extends Component {
     }
 
     renderMean = () => {
-        // console.log("in renderMean this.state.data.hanyi is", this.state.data.hanyi[0].yi)
+        console.log("in renderMean this.state.data.hanyi is", this.state.data.hanyi)
+        console.log("hanyiArray is: ", hanyiArray);
+        // hanyiArray = this.state.data.hanyi;
         if (pinyinArray.length == 1) {
             return (
                 <div>
@@ -197,9 +153,11 @@ class Word extends Component {
                     {hanyiArray.map((means, meansK) => {
                         return (
                             <div>
-                                {means.yi ? (<span style={{ color: '#E2BD97' }}>{`{${means.yin}}`}</span>) : null}
+                                {means.yi ? (<span style={{ color: '#E2BD97' }}>{`{${means.yin}}`}</span>) :
+                                    (<p className="mean-detail"><span className="mean-num">{meansK + 1}</span>{means}</p>)}
                                 {means.yi && means.yi.map((eachMean, eachMeanK) => {
                                     // console.log("eachMean is: ", eachMean);
+
                                     return <p className="mean-detail"><span className="mean-num">{eachMeanK + 1}</span>{eachMean}</p>
                                 })}
                             </div>
@@ -247,7 +205,11 @@ class Word extends Component {
                 </div>) : null}
                 <div className='left-wrap'>
                     <img src={require('./../../images/left-bg.png')} />
-                    <div className='matts'>
+                    {wordData.shuxie ? (
+                        <div className='matts'>
+                            <img src={wordData.shuxie} />
+                        </div>
+                    ) : (<div className='matts'>
                         <img src={require('./../../images/matts.png')} />
                         <div className='word'>
                             <span className="word-hanzi" style={{ textAlign: 'center' }}>{this.props.name}</span>
@@ -255,7 +217,8 @@ class Word extends Component {
                                 <span>{pinyinArray && pinyinArray[0]}</span>
                             </p>
                         </div>
-                    </div>
+                    </div>)}
+
                 </div>
                 <div className="tab-wrap">
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
