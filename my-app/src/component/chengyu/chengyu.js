@@ -110,6 +110,33 @@ class Chengyu extends Component {
         }
     }
 
+    renderHanyi = () => {
+        const chengyuData = this.state.data;
+        if (chengyuData.hanyi) {
+            if (chengyuData.hanyi.length === 1) {
+                return (
+                    <p className="chengyu-basic">
+                        <a>含义:</a>
+                        <span className="chengyu-basic-content">{chengyuData.hanyi}</span>
+                    </p>)
+            } else if (chengyuData.hanyi.length > 1) {
+                return (<div className="chengyu-basic  chengyu-more-hanyi">
+                    <p style={{ whiteSpace: 'nowrap' }}>
+                        <a>含义:</a>
+                    </p>
+                    <div>
+                        {chengyuData.hanyi.map((hanyiValue, hanyiKey) => {
+                            return <p className="chengyu-basic-content">
+                                <span className="hanyi-num">{hanyiKey + 1}</span>{hanyiValue}</p>
+                        })}
+                    </div>
+                </div>)
+            }
+        } else {
+            return null;
+        }
+    }
+
     renderZaoju = () => {
         const chengyuData = this.state.data;
         if (chengyuData.zaoju) {
@@ -187,7 +214,8 @@ class Chengyu extends Component {
                     <TabsControl defaultNum={this.state.defaultNum} length={this.state.lengthNum}>
                         {chengyuData.pinyin || chengyuData.hanyi || chengyuData.chuzi || chengyuData.zaoju ? (<div name="基本信息" className="display-flex-colomn-chengyu">
                             {chengyuData.pinyin ? (<p className="chengyu-basic">拼音: <span className="basic-content chengyu-basic-content">{chengyuData.pinyin}</span></p>) : null}
-                            {chengyuData.hanyi ? (<p className="chengyu-basic">含义: <span className="basic-content chengyu-basic-content">{chengyuData.hanyi}</span></p>) : null}
+                            {this.renderHanyi()}
+                            {/* {chengyuData.hanyi ? (<p className="chengyu-basic">含义: <span className="basic-content chengyu-basic-content">{chengyuData.hanyi}</span></p>) : null} */}
                             {chengyuData.chuzi ? (<p className="chengyu-basic">出自: <span className="basic-content chengyu-basic-content">{chengyuData.chuzi}</span></p>) : null}
                             {this.renderZaoju()}
                         </div>) : null}

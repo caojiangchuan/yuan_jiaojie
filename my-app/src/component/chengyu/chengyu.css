@@ -124,6 +124,10 @@ img {
     display: flex;
 }
 
+.chengyu-more-hanyi {
+    display: flex;
+}
+
 .zaoju-num {
     color: #fff;
     display: inline-block;
