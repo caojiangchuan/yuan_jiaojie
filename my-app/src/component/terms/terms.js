@@ -130,7 +130,7 @@ class Terms extends Component {
                     </p>)
             } else if (termsData.hanyi.length > 1) {
                 return (<div className="terms-basic terms-more-hanyi">
-                    <p style={{ whiteSpace: 'nowrap', marginRight: '2%', minWidth: '70px' }}>
+                    <p style={{ whiteSpace: 'nowrap', minWidth: '50px' }}>
                         <a>含义:</a>
                     </p>
                     <div>
@@ -157,7 +157,7 @@ class Terms extends Component {
                     </p>)
             } else if (termsData.zaoju.length > 1) {
                 return (<div className="terms-basic terms-more-zaoju">
-                    <p id="zaojuAnchor" style={{ whiteSpace: 'nowrap', marginRight: '2%', minWidth: '70px' }}>
+                    <p id="zaojuAnchor" style={{ whiteSpace: 'nowrap', minWidth: '50px' }}>
                         <a href="#zaojuAnchor">造句:</a>
                     </p>
                     <div>
