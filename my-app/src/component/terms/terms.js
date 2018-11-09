@@ -129,8 +129,10 @@ class Terms extends Component {
                          <span className="terms-basic-content">{termsData.hanyi}</span>
                     </p>)
             } else if (termsData.hanyi.length > 1) {
-                return (<div className="terms-basic  terms-more-hanyi">
-                    <p style={{ whiteSpace: 'nowrap' }}>含义:</p>
+                return (<div className="terms-basic terms-more-hanyi">
+                    <p style={{ whiteSpace: 'nowrap', marginRight: '2%', minWidth: '70px' }}>
+                        <a>含义:</a>
+                    </p>
                     <div>
                         {termsData.hanyi.map((hanyiValue, hanyiKey) => {
                             return <p className="terms-basic-content">
@@ -154,8 +156,8 @@ class Terms extends Component {
                         <span className="terms-basic-content">{termsData.zaoju}</span>
                     </p>)
             } else if (termsData.zaoju.length > 1) {
-                return (<div className="terms-basic  terms-more-zaoju">
-                    <p id="zaojuAnchor" style={{ whiteSpace: 'nowrap' }}>
+                return (<div className="terms-basic terms-more-zaoju">
+                    <p id="zaojuAnchor" style={{ whiteSpace: 'nowrap', marginRight: '2%', minWidth: '70px' }}>
                         <a href="#zaojuAnchor">造句:</a>
                     </p>
                     <div>
