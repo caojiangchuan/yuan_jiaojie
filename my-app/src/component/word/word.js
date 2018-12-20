@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import TabsControl from './../tabsControl/tabsControl';
 import reqwest from 'reqwest';
 import config from './../../config';
+import "jsgif";
+// import './../../libgif.js';
 
 //style
 import "../common.css";
@@ -122,6 +124,16 @@ class Word extends Component {
     componentDidMount() {
         this.fetch();
         this.forceUpdate();
+
+        // window.CommonCmd.isHasHandwriting("已")
+
+
+        // document.getElementById('matts').each(function (img_tag) {
+        //     if (/.*\.gif/.test(img_tag.src)) {
+        //         var rub = new SuperGif({ gif: img_tag });
+        //         rub.load();
+        //     }
+        // });
     }
 
     goBack = () => {
@@ -181,6 +193,12 @@ class Word extends Component {
         }
     }
 
+    toMiaohong = (hanzi) => {
+        if (window.CommonCmd.isHasHandwriting(hanzi)) {
+            window.CommonCmd.JsHandwriting(hanzi)
+        }
+    }
+
 
 
     render() {
@@ -206,11 +224,20 @@ class Word extends Component {
                 <div className='left-wrap'>
                     <img src={require('./../../images/left-bg.png')} />
                     {wordData.shuxie ? (
-                        <div className='matts'>
+                        <div className='matts' id="matts"
+                            onClick={this.toMiaohong.bind(this, this.props.name)}>
                             <img src={wordData.shuxie} />
+                            {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
+                                <img src={require('./../../images/miaohong.png')} />
+                            </div>) : null}
+
                         </div>
-                    ) : (<div className='matts'>
+                    ) : (<div className='matts'
+                        onClick={this.toMiaohong.bind(this, this.props.name)}>
                         <img src={require('./../../images/matts.png')} />
+                        {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
+                            <img src={require('./../../images/miaohong.png')} />
+                        </div>) : null}
                         <div className='word'>
                             <span className="word-hanzi" style={{ textAlign: 'center' }}>{this.props.name}</span>
                             <p className="word-pinyin">

@@ -29,9 +29,22 @@ img {
 .matts {
     position: absolute;
     width : 92.85%;
+    width: 80%;
     height: 40%;
     left: 5%;
     top: 1.85%;
+
+}
+
+.mhIcon {
+    position: absolute;
+    width: 13%;
+    top: 1%;
+    left: 1%;
+}
+
+.mhIcon img {
+    width: 100%;
 }
 
 .word-wrap {
