@@ -62,7 +62,7 @@ class Chengyu extends Component {
                 window.location.href = "#zaojuAnchor"
             }
             if (length === 3) {
-                if (propname === "拼音" || propname === "含义" || propname === "出处" || propname === "造句") {
+                if (propname === "拼音" || propname === "含义" || propname === "出处" || propname === "造句" || propname === "用法") {
                     defaultNum = 0;
                 } else if (propname === "反义词") {
                     defaultNum = 1;
@@ -70,13 +70,13 @@ class Chengyu extends Component {
                     defaultNum = 2;
                 }
             } else if (length === 21) {
-                if (propname === "拼音" || propname === "含义" || propname === "出处" || propname === "造句") {
+                if (propname === "拼音" || propname === "含义" || propname === "出处" || propname === "造句" || propname === "用法") {
                     defaultNum = 0;
                 } else {
                     defaultNum = 1;
                 }
             } else if (length === 22) {
-                if (propname === "拼音" || propname === "含义" || propname === "出处" || propname === "造句") {
+                if (propname === "拼音" || propname === "含义" || propname === "出处" || propname === "造句" || propname === "用法") {
                     defaultNum = 0;
                 } else {
                     defaultNum = 1;
@@ -88,6 +88,8 @@ class Chengyu extends Component {
                     defaultNum = 1;
                 }
             } else if (length === 1) {
+                defaultNum = 0;
+            } else {
                 defaultNum = 0;
             }
 

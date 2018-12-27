@@ -145,31 +145,43 @@ class Word extends Component {
     renderMean = () => {
         console.log("in renderMean this.state.data.hanyi is", this.state.data.hanyi)
         console.log("hanyiArray is: ", hanyiArray);
+        console.log("pinyinArray is: ", pinyinArray);
+        console.log("pinyinArray.length == 1", pinyinArray.length == 1);
         // hanyiArray = this.state.data.hanyi;
         if (pinyinArray.length == 1) {
+            console.log("执行这里")
             return (
                 <div>
                     {hanyiArray.map((mean, meanK) => {
-                        if (hanyiArray.length == 1) {
-                            return <p className="mean-detail">{mean}</p>
-                        } else {
-                            return <p className="mean-detail"><span className="mean-num">{meanK + 1}</span>{mean}</p>
-                        }
-
+                        console.log("mean, meanK is: ", mean, meanK);
+                        // if (hanyiArray.length == 1) {
+                        //     return <p className="mean-detail">{mean}</p>
+                        // } else {
+                        //     return <p className="mean-detail"><span className="mean-num">{meanK + 1}</span>{mean}</p>
+                        // }
+                        return (
+                            <div>
+                                {mean.yin ? (<span style={{ color: '#E2BD97' }}>{`{${mean.yin}}`}</span>) :
+                                    (<p className="mean-detail"><span className="mean-num">{meanK + 1}</span>{mean}</p>)}
+                                {mean.yi && mean.yi.map((eachMean, eachMeanK) => {
+                                    return <p className="mean-detail"><span className="mean-num">{eachMeanK + 1}</span>{eachMean}</p>
+                                })}
+                            </div>
+                        )
                     })}
                 </div>
             )
         } else if (pinyinArray.length > 1 && pinyinArray.length == hanyiArray.length) {
+            console.log("pinyinArray 是这里", pinyinArray);
             return (
                 <div>
                     {hanyiArray.map((means, meansK) => {
+                        console.log("means, meansK", means, meansK);
                         return (
                             <div>
-                                {means.yi ? (<span style={{ color: '#E2BD97' }}>{`{${means.yin}}`}</span>) :
+                                {means.yin ? (<span style={{ color: '#E2BD97' }}>{`{${means.yin}}`}</span>) :
                                     (<p className="mean-detail"><span className="mean-num">{meansK + 1}</span>{means}</p>)}
                                 {means.yi && means.yi.map((eachMean, eachMeanK) => {
-                                    // console.log("eachMean is: ", eachMean);
-
                                     return <p className="mean-detail"><span className="mean-num">{eachMeanK + 1}</span>{eachMean}</p>
                                 })}
                             </div>
@@ -193,11 +205,11 @@ class Word extends Component {
         }
     }
 
-    toMiaohong = (hanzi) => {
-        if (window.CommonCmd.isHasHandwriting(hanzi)) {
-            window.CommonCmd.JsHandwriting(hanzi)
-        }
-    }
+    // toMiaohong = (hanzi) => {
+    //     if (window.CommonCmd.isHasHandwriting(hanzi)) {
+    //         window.CommonCmd.JsHandwriting(hanzi)
+    //     }
+    // }
 
 
 
@@ -225,19 +237,22 @@ class Word extends Component {
                     <img src={require('./../../images/left-bg.png')} />
                     {wordData.shuxie ? (
                         <div className='matts' id="matts"
-                            onClick={this.toMiaohong.bind(this, this.props.name)}>
+                        // onClick={this.toMiaohong.bind(this, this.props.name)}
+                        >
                             <img src={wordData.shuxie} />
-                            {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
+                            {/* <img src='http://robot.yuanqutech.com/math/4.gif' /> */}
+                            {/* {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
                                 <img src={require('./../../images/miaohong.png')} />
-                            </div>) : null}
+                            </div>) : null} */}
 
                         </div>
                     ) : (<div className='matts'
-                        onClick={this.toMiaohong.bind(this, this.props.name)}>
+                    // onClick={this.toMiaohong.bind(this, this.props.name)}
+                    >
                         <img src={require('./../../images/matts.png')} />
-                        {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
+                        {/* {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
                             <img src={require('./../../images/miaohong.png')} />
-                        </div>) : null}
+                        </div>) : null} */}
                         <div className='word'>
                             <span className="word-hanzi" style={{ textAlign: 'center' }}>{this.props.name}</span>
                             <p className="word-pinyin">
