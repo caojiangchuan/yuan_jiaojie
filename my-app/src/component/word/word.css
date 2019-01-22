@@ -47,6 +47,18 @@ img {
     width: 100%;
 }
 
+.replay {
+    position: absolute;
+    width: 10%;
+    bottom: -3%;;
+    right: -3%;
+    padding: 5%;
+}
+
+.replay img {
+    width: 100%;
+}
+
 .word-wrap {
     position: absolute;
     width: 39.67%;

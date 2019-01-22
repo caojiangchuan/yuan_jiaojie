@@ -30,6 +30,8 @@ class Word extends Component {
             defaultNum: 0,
             length: 0,
             lengthNum: 0,
+            showImg: true,
+            imgTime: ''
         }
     }
 
@@ -211,7 +213,26 @@ class Word extends Component {
     //     }
     // }
 
+    replay = (e) => {
+        // console.log("重新播放");
+        // this.setState({
+        //     showImg: false
+        // }, () => {
+        //     this.setState({
+        //         showImg: true
+        //     })
+        // })
+        e.stopPropagation();
+        var currentTime;
+        if (this.state.imgTime == currentTime) {
+            currentTime = new Date().getTime();
+        }
 
+        this.setState({
+            imgTime: currentTime
+        })
+
+    }
 
     render() {
 
@@ -220,9 +241,9 @@ class Word extends Component {
         const wordsArray = words && words.split("、");
 
 
-        console.log(" this.state.data is: ", this.state.data);
-        console.log("pinyinArray  is: ", pinyinArray);
-
+        // console.log(" this.state.data is: ", this.state.data);
+        // console.log("pinyinArray  is: ", pinyinArray);
+        console.log("this.state.imgTime is: ", this.state.imgTime);
 
 
         return (
@@ -239,8 +260,12 @@ class Word extends Component {
                         <div className='matts' id="matts"
                         // onClick={this.toMiaohong.bind(this, this.props.name)}
                         >
-                            <img src={wordData.shuxie} />
-                            {/* <img src='http://robot.yuanqutech.com/math/4.gif' /> */}
+                            {/* <img src={this.state.showImg ? wordData.shuxie : ''} /> */}
+                            <img src={`${wordData.shuxie}?t=${this.state.imgTime}`} />
+                            {/* <img src='http://robot.yuanqutech.com/math/1.gif' /> */}
+                            <div onClick={this.replay} className='replay'>
+                                <img src={require('./../../images/replay.png')} />
+                            </div>
                             {/* {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
                                 <img src={require('./../../images/miaohong.png')} />
                             </div>) : null} */}
