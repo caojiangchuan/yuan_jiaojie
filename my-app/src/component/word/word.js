@@ -207,11 +207,11 @@ class Word extends Component {
         }
     }
 
-    // toMiaohong = (hanzi) => {
-    //     if (window.CommonCmd.isHasHandwriting(hanzi)) {
-    //         window.CommonCmd.JsHandwriting(hanzi)
-    //     }
-    // }
+    toMiaohong = (hanzi) => {
+        if (window.CommonCmd.isHasHandwriting(hanzi)) {
+            window.CommonCmd.JsHandwriting(hanzi)
+        }
+    }
 
     replay = (e) => {
         // console.log("重新播放");
@@ -258,7 +258,7 @@ class Word extends Component {
                     <img src={require('./../../images/left-bg.png')} />
                     {wordData.shuxie ? (
                         <div className='matts' id="matts"
-                        // onClick={this.toMiaohong.bind(this, this.props.name)}
+                            onClick={this.toMiaohong.bind(this, this.props.name)}
                         >
                             {/* <img src={this.state.showImg ? wordData.shuxie : ''} /> */}
                             <img src={`${wordData.shuxie}?t=${this.state.imgTime}`} />
@@ -266,18 +266,18 @@ class Word extends Component {
                             <div onClick={this.replay} className='replay'>
                                 <img src={require('./../../images/replay.png')} />
                             </div>
-                            {/* {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
+                            {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
                                 <img src={require('./../../images/miaohong.png')} />
-                            </div>) : null} */}
+                            </div>) : null}
 
                         </div>
                     ) : (<div className='matts'
-                    // onClick={this.toMiaohong.bind(this, this.props.name)}
+                        onClick={this.toMiaohong.bind(this, this.props.name)}
                     >
                         <img src={require('./../../images/matts.png')} />
-                        {/* {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
+                        {window.CommonCmd.isHasHandwriting(this.props.name) ? (<div className="mhIcon">
                             <img src={require('./../../images/miaohong.png')} />
-                        </div>) : null} */}
+                        </div>) : null}
                         <div className='word'>
                             <span className="word-hanzi" style={{ textAlign: 'center' }}>{this.props.name}</span>
                             <p className="word-pinyin">
