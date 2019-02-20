@@ -1,0 +1,79 @@
+.tag-poem-wrap {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+}
+
+.tag-poem-wrap img {
+    width: 100%;
+}
+
+.main-bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    overflow: hidden;
+}
+
+.main-bg>img {
+    height: 100%;
+}
+
+.bg {
+    position: absolute;
+    width: 94%;
+    height: 95.25%;
+    top: 2.3%;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.bg>img {
+    height: 100%;
+}
+
+.tag-poem-info {
+    position: absolute;
+    width: 91%;
+    height: 85%;
+    top: 6%;
+    left: 6%;
+    /* border: 1px solid red; */
+}
+
+.tag-poem-title {
+    width: 100%;
+    margin-top: 4%;
+    font-size: 5vw;
+    text-align: center;
+    letter-spacing: 2px;
+    margin-bottom: 3%;
+}
+
+.tag-name {
+   color: #3184CA;
+   margin: 0 10px;
+}
+
+.tag-poem-content {
+    width: 68.5%;
+    /* border: 1px solid blue; */
+    margin: auto;
+    height: 66%;
+    overflow-y: auto;
+}
+
+.tag-poem-content-item {
+    width: 100%;
+    font-size: 3vw;
+    padding: 3px 0;
+    color: #328EC3;
+    background: #D8F6FF;
+    border-radius:4px;
+    margin-bottom: 4%;
+}
+
+.tag-poem-content-item:last-child{
+    margin-bottom: 0;
+}
