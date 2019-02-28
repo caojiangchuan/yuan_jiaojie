@@ -6,7 +6,6 @@ import "../common.css";
 import './index.css';
 
 
-
 class Poem extends Component {
     constructor() {
         super();
@@ -46,6 +45,7 @@ class Poem extends Component {
 
     fetch = (params = {}) => {
         var that = this;
+        console.log("this.props.uq is: ", this.props.uq);
         fetch(`${config.host}:${config.port}/shici/search?tid=${this.props.tid}&uq=${this.props.uq}`).then(function (res) {
             // 请求成功，得到 response 对象，调用 response 对象的 json 方法并返回
             if (res.ok) {
@@ -149,7 +149,7 @@ class Poem extends Component {
                                     if (wordV.yi) {
                                         return <span className='poem-verse-word' onClick={this.showMean.bind(this, wordV.yi)}>
                                             {wordV.ci}
-                                            {this.state.showMean && this.state.wordMean && this.state.word == wordV.ci ? (<div id='poem-verse-word-mean' className='poem-verse-word-mean' style={{ width: this.state.wordMeanWidth * 0.95 + 'px', height: '12vw', top: ' -15vw', left: -(this.state.left - 20) + 'px' }}>
+                                            {this.state.showMean && this.state.wordMean && this.state.word == wordV.ci ? (<div id='poem-verse-word-mean' className='poem-verse-word-mean' style={{ width: this.state.wordMeanWidth * 0.92 + 'px', height: '12vw', top: ' -15vw', left: -(this.state.left - 25) + 'px' }}>
                                                 <span>{this.state.word}：</span>{this.state.wordMean}
                                             </div>) : null}
                                             {this.state.showMean && this.state.wordMean && this.state.word == wordV.ci ? (<div className='triangle-icon' style={{ left: (this.state.width / 2 - 10) + 'px', top: '-2vw' }}></div>) : null}
@@ -174,7 +174,7 @@ class Poem extends Component {
                                     if (wordV.yi) {
                                         return <span className='poem-verse-word poem-verse-word-ci' onClick={this.showMean.bind(this, wordV.yi)}>
                                             {wordV.ci}
-                                            {this.state.showMean && this.state.wordMean && this.state.word == wordV.ci ? (<div id='poem-verse-word-mean' className='poem-verse-word-mean' style={{ width: this.state.wordMeanWidth * 0.95 + 'px', height: '12vw', top: ' -14vw', left: -(this.state.left - 20) + 'px' }}>
+                                            {this.state.showMean && this.state.wordMean && this.state.word == wordV.ci ? (<div id='poem-verse-word-mean' className='poem-verse-word-mean' style={{ width: this.state.wordMeanWidth * 0.92 + 'px', height: '12vw', top: ' -14vw', left: -(this.state.left - 25) + 'px' }}>
                                                 <span>{this.state.word}：</span>{this.state.wordMean}
                                             </div>) : null}
                                             {this.state.showMean && this.state.wordMean && this.state.word == wordV.ci ? (<div className='triangle-icon' style={{ left: (this.state.width / 2 - 10) + 'px', top: '-1vw' }}></div>) : null}
@@ -230,6 +230,85 @@ class Poem extends Component {
         }
 
     }
+
+    renderStar = () => {
+        console.log("this.state.data['star']", this.state.data['star'])
+        console.log("this.state.data['star'] != undefined", this.state.data['star'] != undefined);
+        if (this.state.data['star'] != undefined) {
+            if (this.state.data['star'] == 0) {
+                return (
+                    <div className='poem-other'>
+                        <div className='poem-mastery-degree'>
+                            <span className=''>掌握度：</span>
+                            <div className='stars'>
+                                <span className='star'><img src={require('./../../images/star-gray.png')} /></span>
+                                <span className='star'><img src={require('./../../images/star-gray.png')} /></span>
+                                <span className='star'><img src={require('./../../images/star-gray.png')} /></span>
+                            </div>
+                        </div>
+                        <div className='study-poem'>
+                            <span>学习诗词</span>
+                            <i className='study-poem-icon'><img src={require('./../../images/next.png')} /></i>
+                        </div>
+                    </div>
+                )
+            } else if (this.state.data['star'] == 1) {
+                return (
+                    <div className='poem-other'>
+                        <div className='poem-mastery-degree'>
+                            <span className=''>掌握度：</span>
+                            <div className='stars'>
+                                <span className='star'><img src={require('./../../images/star-yellow.png')} /></span>
+                                <span className='star'><img src={require('./../../images/star-gray.png')} /></span>
+                                <span className='star'><img src={require('./../../images/star-gray.png')} /></span>
+                            </div>
+                        </div>
+                        <div className='study-poem'>
+                            <span>学习诗词</span>
+                            <i className='study-poem-icon'><img src={require('./../../images/next.png')} /></i>
+                        </div>
+                    </div>
+                )
+            } else if (this.state.data['star'] == 2) {
+                return (
+                    <div className='poem-other'>
+                        <div className='poem-mastery-degree'>
+                            <span className=''>掌握度：</span>
+                            <div className='stars'>
+                                <span className='star'><img src={require('./../../images/star-yellow.png')} /></span>
+                                <span className='star'><img src={require('./../../images/star-yellow.png')} /></span>
+                                <span className='star'><img src={require('./../../images/star-gray.png')} /></span>
+                            </div>
+                        </div>
+                        <div className='study-poem'>
+                            <span>学习诗词</span>
+                            <i className='study-poem-icon'><img src={require('./../../images/next.png')} /></i>
+                        </div>
+                    </div>
+                )
+            } else if (this.state.data['star'] == 3) {
+                return (
+                    <div className='poem-other'>
+                        <div className='poem-mastery-degree'>
+                            <span className=''>掌握度：</span>
+                            <div className='stars'>
+                                <span className='star'><img src={require('./../../images/star-yellow.png')} /></span>
+                                <span className='star'><img src={require('./../../images/star-yellow.png')} /></span>
+                                <span className='star'><img src={require('./../../images/star-yellow.png')} /></span>
+                            </div>
+                        </div>
+                        <div className='study-poem'>
+                            <span>学习诗词</span>
+                            <i className='study-poem-icon'><img src={require('./../../images/next.png')} /></i>
+                        </div>
+                    </div>
+                )
+            }
+        } else {
+            return null;
+        }
+
+    }
     renderPoemRight = (nav) => {
         if (nav === "原文") {
             return (
@@ -251,26 +330,8 @@ class Poem extends Component {
                             }
                         </div>
                         {this.renderPoemVerse()}
-
-                        {/* {this.state.showMean && this.state.wordMean ? (<div id='poem-verse-word-mean' className='poem-verse-word-mean' style={{ top: this.state.meanTop + 'px' }}>
-                            <span>{this.state.word}：</span>{this.state.wordMean}
-                        </div>) : null} */}
-                        {/* {this.state.showMean && this.state.wordMean ? (<div className='triangle-icon' style={{ left: (this.state.left + this.state.width / 2 - 10) + 'px', top: (this.state.top - 20) + 'px' }}></div>) : null} */}
                     </div>
-                    <div className='poem-other'>
-                        <div className='poem-mastery-degree'>
-                            <span className=''>掌握度：</span>
-                            <div className='stars'>
-                                <span className='star'><img src={require('./../../images/star-yellow.png')} /></span>
-                                <span className='star'><img src={require('./../../images/star-yellow.png')} /></span>
-                                <span className='star'><img src={require('./../../images/star-yellow.png')} /></span>
-                            </div>
-                        </div>
-                        <div className='study-poem'>
-                            <span>学习诗词</span>
-                            <i className='study-poem-icon'><img src={require('./../../images/next.png')} /></i>
-                        </div>
-                    </div>
+                    {this.renderStar()}
                 </div>
             )
         } else if (nav === "译文") {
@@ -338,6 +399,12 @@ class Poem extends Component {
         )
     }
 
+    goBack = () => {
+        if (document.referrer) {
+            window.history.back();
+        }
+    }
+
     render() {
         return (
             <div className='poem-wrap'>
@@ -345,6 +412,10 @@ class Poem extends Component {
                     <img src={require('./../../images/main-bg.png')} />
                 </div>
                 <div className='bg'>
+                    {document.referrer ? (<div className='poem-back-btn' onClick={this.goBack}>
+                        <img src={require('./../../images/back.png')} />
+                    </div>) : null}
+
                     <img src={require('./../../images/bg.png')} />
                     <div className='poem-left'>
                         {this.renderNav()}
@@ -354,7 +425,7 @@ class Poem extends Component {
                             </div>
                             <div className='poem-tags'>
                                 {this.state.data && this.state.data['biaoqian'].map((tagV, tagK) => {
-                                    return <a className='poem-tag-item' href={`${document.location.toString().split("?")[0]}?tid=${this.props.tid}&skey=undefined&entityname=${tagV}&entitytype=诗词列表&propname=主题列表`}>{tagV}</a>
+                                    return <a className='poem-tag-item' href={`${document.location.toString().split("?")[0]}?tid=${this.props.tid}&skey=undefined&entityname=${tagV}&entitytype=诗名&propname=作者&typeflg=诗名列表`}>{tagV}</a>
                                 })}
                             </div>
                         </div>) : null}

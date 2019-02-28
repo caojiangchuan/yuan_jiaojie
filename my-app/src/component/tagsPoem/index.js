@@ -61,6 +61,12 @@ class Poem extends Component {
         this.fetch();
     }
 
+    goBack = () => {
+        if (document.referrer) {
+            window.history.back();
+        }
+    }
+
     render() {
         return (
             <div className='tag-poem-wrap'>
@@ -68,6 +74,9 @@ class Poem extends Component {
                     <img src={require('./../../images/main-bg.png')} />
                 </div>
                 <div className='bg'>
+                    {document.referrer ? (<div className='poem-back-btn' onClick={this.goBack}>
+                        <img src={require('./../../images/back.png')} />
+                    </div>) : null}
                     <img src={require('./../../images/bg-no.png')} />
                     <div className='tag-poem-info'>
                         <div className='tag-poem-title'>关于<span className='tag-name'>“{this.props.entityName}”</span>的诗句</div>
@@ -75,7 +84,7 @@ class Poem extends Component {
                             {this.state.data && this.state.data['zuopin'].map((zuopinV, zuipinK) => {
                                 return (
                                     <div className='tag-poem-content-item'>
-                                        <a style={{ display: 'inline-block', width: '100%' }} href={`${document.location.toString().split("?")[0]}?tid=${this.props.tid}&skey=undefined&entityname=${zuopinV.uq.split("_")[0]}&entitytype=诗名&propname=作者&poemtitle=${zuopinV.uq.split("_")[0]}&poemauthor=${zuopinV.uq.split("_")[1]}&firstsent=${zuopinV.uq.split("_")[2]}`}>
+                                        <a style={{ display: 'inline-block', width: '100%' }} href={`${document.location.toString().split("?")[0]}?tid=${this.props.tid}&skey=undefined&entityname=${zuopinV.biaoti}&entitytype=诗名&propname=作者&md=${zuopinV.uq}`}>
                                             <span>《{zuopinV.biaoti}》</span>
                                             <span>{zuopinV.chaodai}</span>
                                             <span>/</span>

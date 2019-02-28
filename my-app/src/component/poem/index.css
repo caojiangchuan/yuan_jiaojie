@@ -29,6 +29,13 @@
     margin: auto;
 }
 
+.poem-back-btn {
+    position: absolute;
+    width: 10%;
+    top: -3%;
+    left: -2%;
+}
+
 .bg>img {
     height: 100%;
 }

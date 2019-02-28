@@ -48,6 +48,12 @@ class Author extends Component {
         console.log(document.location.toString().split("?")[0]);
     }
 
+    goBack = () => {
+        if (document.referrer) {
+            window.history.back();
+        }
+    }
+
     renderNav = () => {
         return (
             <div className='author-nav-wrap'>
@@ -108,6 +114,9 @@ class Author extends Component {
                     <img src={require('./../../images/main-bg.png')} />
                 </div>
                 <div className='bg'>
+                    {document.referrer ? (<div className='poem-back-btn' onClick={this.goBack}>
+                        <img src={require('./../../images/back.png')} />
+                    </div>) : null}
                     <img src={require('./../../images/bg.png')} />
                     <div className='author-left'>
                         <div className='author-name-wrap'>

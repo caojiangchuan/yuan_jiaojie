@@ -73,32 +73,36 @@ class App extends React.Component {
     var authorString = this.getQueryString("author");
     var author = this.stringReplace(authorString);
 
-    // switch (entityType) {
-    //   case "汉字":
-    //     return <Word name={entityName} type={entityType} propname={propName} tid={tid} skey={sKey} num={0} />
-    //     break;
-    //   case "字":
-    //     return <Word name={entityName} type={entityType} propname={propName} tid={tid} skey={sKey} num={0} />
-    //     break;
-    //   case "成语":
-    //     return <Chengyu name={entityName} type={entityType} propname={propName} tid={tid} skey={sKey} />
-    //     break;
-    //   case "词语":
-    //     return <Terms name={entityName} type={entityType} propname={propName} tid={tid} skey={sKey} />
-    //     break;
-    //   default:
-    //     return <Terms name={entityName} type={entityType} propname={propName} tid={tid} skey={sKey} />
-    // }
-    switch (entityType) {
-      case "诗名":
-        return <Poem type={entityType} tid={tid} uq={`${poemTitle}_${poemAuthor}_${firstsent}`} />
-      case "诗句":
-        return <Poem type={entityType} tid={tid} uq={`${poemTitle}_${poemAuthor}_${firstsent}`} />
-      case "诗人":
+    var mdString = this.getQueryString("md");
+    var md = this.stringReplace(mdString);
+
+    var typeflgString = this.getQueryString("typeflg");
+    var typeflg = this.stringReplace(typeflgString);
+
+
+    if (typeflg) {
+      return <TagPoem type={entityType} tid={tid} entityName={entityName} tag={tag} />
+    } else {
+      if (entityType == "诗名") {
+        return <Poem type={entityType} tid={tid} uq={md} />
+      } else if (entityType == "诗句") {
+        return <Poem type={entityType} tid={tid} uq={md} />
+      } else if (entityType == "诗人") {
         return <Author type={entityType} tid={tid} entityName={entityName} author={author} />
-      case "诗词列表":
-        return <TagPoem type={entityType} tid={tid} entityName={entityName} tag={tag} />
+      } else {
+        return null
+      }
     }
+    // switch (entityType) {
+    //   case "诗名":
+    //     return <Poem type={entityType} tid={tid} uq={`${poemTitle}_${poemAuthor}_${firstsent}`} />
+    //   case "诗句":
+    //     return <Poem type={entityType} tid={tid} uq={`${poemTitle}_${poemAuthor}_${firstsent}`} />
+    //   case "诗人":
+    //     return <Author type={entityType} tid={tid} entityName={entityName} author={author} />
+    //   case "诗词列表":
+    //     return <TagPoem type={entityType} tid={tid} entityName={entityName} tag={tag} />
+    // }
 
   }
 }
