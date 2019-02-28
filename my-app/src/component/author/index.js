@@ -103,7 +103,7 @@ class Author extends Component {
                             {this.state.data['zuopin'].map((zuopinV, zuopinK) => {
                                 return (
                                     <div className='author-works-item'>
-                                        <a style={{ display: 'inline-block' }} href={`${document.location.toString().split("?")[0]}?tid=${this.props.tid}&skey=undefined&entityname=${zuopinV.uq.split("_")[0]}&entitytype=诗名&propname=作者&poemtitle=${zuopinV.uq.split("_")[0]}&poemauthor=${zuopinV.uq.split("_")[1]}&firstsent=${zuopinV.uq.split("_")[2]}`}>
+                                        <a style={{ display: 'inline-block' }} href={`${document.location.toString().split("?")[0]}?tid=${this.props.tid}&skey=undefined&entityname=${zuopinV.biaoti}&entitytype=诗名&propname=作者&md=${zuopinV.uq}`}>
                                             {console.log("this.state.data", zuopinV.uq.split("_"))}
                                             <h3 className='author-works-item-title'>{zuopinV.biaoti}</h3>
                                             <p className='author-works-item-content'>{zuopinV.shiwen}</p>
