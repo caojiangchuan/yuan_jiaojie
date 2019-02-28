@@ -46,6 +46,19 @@ class Author extends Component {
         console.log("window.location.href", window.location.href)
         console.log("window.location.host;", window.location.host)
         console.log(document.location.toString().split("?")[0]);
+        if (this.props.propname == "作品") {
+            this.setState({
+                nav: "作品"
+            })
+        } else if (this.props.propname == "简介") {
+            this.setState({
+                nav: "简介"
+            })
+        } else {
+            this.setState({
+                nav: "简介"
+            })
+        }
     }
 
     goBack = () => {

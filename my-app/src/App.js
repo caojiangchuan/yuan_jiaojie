@@ -84,11 +84,11 @@ class App extends React.Component {
       return <TagPoem type={entityType} tid={tid} entityName={entityName} tag={tag} />
     } else {
       if (entityType == "诗名") {
-        return <Poem type={entityType} tid={tid} uq={md} />
+        return <Poem type={entityType} tid={tid} uq={md} propname={propName} />
       } else if (entityType == "诗句") {
-        return <Poem type={entityType} tid={tid} uq={md} />
+        return <Poem type={entityType} tid={tid} uq={md} propname={propName} />
       } else if (entityType == "诗人") {
-        return <Author type={entityType} tid={tid} entityName={entityName} author={author} />
+        return <Author type={entityType} tid={tid} entityName={entityName} author={author} propname={propName} />
       } else {
         return null
       }

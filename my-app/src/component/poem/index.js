@@ -64,7 +64,20 @@ class Poem extends Component {
 
     componentDidMount() {
         this.fetch();
-
+        console.log("this.props.propname", this.props.propname)
+        if (this.props.propname == "翻译") {
+            this.setState({
+                nav: "译文"
+            })
+        } else if (this.props.propname == "赏析") {
+            this.setState({
+                nav: "赏析"
+            })
+        } else {
+            this.setState({
+                nav: "原文"
+            })
+        }
     }
 
 
@@ -373,7 +386,7 @@ class Poem extends Component {
             return (
                 <div className='poem-right' style={{ opacity: nav === "赏析" ? "1" : "0" }}>
                     <div className='poem-appreciation'>
-                        {this.state.data['shangxi'].map((shangxiV, shangxiK) => {
+                        {this.state.data && this.state.data['shangxi'].map((shangxiV, shangxiK) => {
                             return <p className='poem-appreciation-item'>{shangxiV}</p>
                         })}
                     </div>
