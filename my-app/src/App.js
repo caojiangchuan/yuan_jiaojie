@@ -79,12 +79,15 @@ class App extends React.Component {
     var typeflgString = this.getQueryString("typeflg");
     var typeflg = this.stringReplace(typeflgString);
 
+    var starString = this.getQueryString("star");
+    var star = this.stringReplace(starString);
+
 
     if (typeflg) {
       return <TagPoem type={entityType} tid={tid} entityName={entityName} tag={tag} />
     } else {
       if (entityType == "诗名") {
-        return <Poem type={entityType} tid={tid} uq={md} propname={propName} />
+        return <Poem type={entityType} tid={tid} uq={md} propname={propName} star={star} />
       } else if (entityType == "诗句") {
         return <Poem type={entityType} tid={tid} uq={md} propname={propName} />
       } else if (entityType == "诗人") {

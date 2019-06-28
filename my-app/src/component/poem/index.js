@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import config from './../../config';
-
+import qs from 'qs';
 //style
 import "../common.css";
 import './index.css';
@@ -21,8 +21,20 @@ class Poem extends Component {
             showMean: false,
             meanTop: 0,
             wordMean: "",
-            data: ''
+            data: '',
+            Imglength:['a', 'b', 'c'],
+
+
         }
+        this.goAnd=this.goAnd.bind(this)
+    }
+    goAnd=()=>{
+        var a = {
+            a:'123'
+        }
+        var b = JSON.stringify(a)
+
+        window.CommonCmd&&window.CommonCmd.sendToAndroid(b)
     }
 
     toggleBtn = () => {
@@ -63,6 +75,17 @@ class Poem extends Component {
     }
 
     componentDidMount() {
+
+        console.log(this.props.star, '11111')
+        console.log(decodeURIComponent(window.location.href).split('?')[1])
+        var url = decodeURIComponent(window.location.href).split('?')[1]
+        console.log(qs.parse(url));
+        var Jurl = JSON.stringify(qs.parse(url))
+        console.log(Jurl)
+        //将url参数转为json
+        // const a = {name:'hehe',age:10};
+
+        // console.log(qs.stringify(a))
         this.fetch();
         console.log("this.props.propname", this.props.propname)
         if (this.props.propname == "翻译") {
@@ -345,7 +368,22 @@ class Poem extends Component {
                         {this.renderPoemVerse()}
                     </div>
                     {this.renderStar()}
+                    <div className='allmaster'>
+                        {/*<div className='study'>学习诗词<span><img src={require('./../../images/gostudy.png')} /></span></div>*/}
+                    {/*<div className='master'>掌握度：<span>   <img src={require('./../../images/star.png')} /></span><span>   <img src={require('./../../images/star.png')} /></span><span>   <img src={require('./../../images/star.png')} /></span></div>*/}
+
+                        <div><span className='study'>学习诗词<span onClick={this.goAnd}><img src={require('./../../images/gostudy.png')}  /></span></span></div>
+                        <div><span className='master'>掌握度：{this.state.Imglength.map((item,index)=>{
+                            return(
+                           <span>
+                                {index+1<=this.props.star?<img src={require('./../../images/star.png')} />:<img src={require('./../../images/gray-star.png')} />}
+                           </span>
+                            )
+                        })}</span></div>
+
+                    </div>
                 </div>
+
             )
         } else if (nav === "译文") {
             return (
@@ -444,7 +482,9 @@ class Poem extends Component {
                         </div>) : null}
 
                     </div>
+
                     {this.renderPoemRight(this.state.nav)}
+
                 </div>
             </div>
         )

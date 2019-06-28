@@ -6,7 +6,10 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    -webkit-overflow-scrolling: touch;
+
 }
+
 
 ul,li {
     list-style: none;

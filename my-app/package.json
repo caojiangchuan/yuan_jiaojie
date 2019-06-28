@@ -6,6 +6,7 @@
     "jsgif": "^1.0.2",
     "libgif": "0.0.2",
     "prop-types": "^15.6.2",
+    "qs": "^6.7.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-router": "^4.3.1",

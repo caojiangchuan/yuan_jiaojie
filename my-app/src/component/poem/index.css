@@ -172,7 +172,7 @@
     justify-content: center;
     align-items: center;
     margin-top: 2%;
-    
+
 }
 
 .poem-content-name-bg>img {
@@ -282,9 +282,9 @@
     width: 80%;
     background: #54B9F2;
     color: #fff;
-    border-radius:10px; 
-    padding: 5px 10px; 
-    z-index: 10; 
+    border-radius:10px;
+    padding: 5px 10px;
+    z-index: 10;
     overflow-y: auto;
     text-align: left;
 }
@@ -355,7 +355,7 @@
 
 .star {
     display: inline-block;
-    width: 25%; 
+    width: 25%;
 }
 
 .study-poem {
@@ -516,7 +516,7 @@
     left: 50%;
 }
 
-.poem-translate-all-item-translation { 
+.poem-translate-all-item-translation {
     /* border: 1px solid green; */
     font-family:'KaiTi';
     width: 90%;
@@ -560,3 +560,32 @@
     left: 190px;
 }
 
+
+.allmaster{
+    display: flex;
+    flex-direction:row-reverse;
+    margin-top: 2vh;
+}
+.study , .master{
+    font-size: 2.5vw;
+    color:#999999;
+    font-family:KaiTi;
+    margin-right: 20px;
+}
+.master{
+    margin-right: 40px;
+}
+.master img{
+    width: 3vw; height:3vw;
+    position: relative;
+    top: 0.7vw;
+
+}
+.study img{
+    width:3vw;
+    height: 3vw;
+    position: relative;
+top: 0.8vw;
+    left: 0.8vw;
+
+}
